@@ -1,0 +1,63 @@
+
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Personal Brand Visibility System | Roshni B</title>
+            <meta name="description" content="A practical system for turning day-to-day work into portfolio stories, reflection notes, and shareable proof of growth.">
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body class="site-body">
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+            <header class="site-header"><div class="brand"><a href="/">RB</a></div><nav class="site-nav"><a class="nav-link" href="/">Home</a><a class="nav-link active" href="/projects">Projects</a><a class="nav-link" href="/articles">Articles</a><a class="nav-link" href="/#hobbies">Hobbies</a><a class="nav-link" href="/#contact">Contact</a></nav></header>
+            <main class="page-main">
+        <section class="detail-hero">
+            <div class="breadcrumb"><a href="/">Home</a> / <a href="/projects">Projects</a></div>
+            <div class="detail-hero__grid">
+                <div class="detail-hero__copy">
+                    <div class="eyebrow">Project</div>
+                    <h1>Personal Brand Visibility System</h1>
+                    <p class="hero-lead">A practical system for turning day-to-day work into portfolio stories, reflection notes, and shareable proof of growth.</p>
+                    <div class="story-meta">April 11, 2026 • 5 min read</div>
+                    <div class="tag-row"><span class="tag">career growth</span><span class="tag">portfolio</span><span class="tag">personal branding</span></div>
+                </div>
+                <div class="detail-cover">
+                    <div class="cover-placeholder tone-sunrise"><span class="cover-pill">Project</span><strong>PB</strong><p>Personal Brand Visibility System</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="detail-layout">
+            <article class="article-body">
+                <h2>The idea</h2>
+<p>I wanted a way to make my work more visible without waiting for a major milestone. The goal was simple: capture useful pieces of my day-to-day experience and shape them into something others can understand.</p>
+<h2>What I built</h2>
+<ul><li>A repeatable note-taking rhythm after projects and meetings</li><li>A structure for converting work experience into blog-style reflections</li><li>A portfolio plan that groups my work into projects, articles, and personal interests</li></ul>
+<h2>Why it matters</h2>
+<p>This project is less about self-promotion and more about clarity. It helps me communicate what I am learning, what kinds of problems I enjoy, and how I approach growth.</p>
+<h2>Next step</h2>
+<p>I am expanding this system into a living website where each article and project can show both the story and the proof behind it.</p>
+            </article>
+            <aside class="detail-sidecard">
+                <div class="eyebrow">Profile Note</div>
+                <p>Right now, I am focused on building a stronger public body of work: documenting projects, writing more intentionally, and making my thinking easier to discover.</p>
+                <a class="inline-link" href="/articles">Read more writing</a>
+            </aside>
+        </section>
+</main>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+</script>
+
+        </body>
+        </html>

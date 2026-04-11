@@ -1,0 +1,73 @@
+
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Articles | Roshni B</title>
+            <meta name="description" content="Writing that helps hiring leaders see how I think, communicate, and grow through work.">
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body class="site-body">
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+            <header class="site-header"><div class="brand"><a href="/">RB</a></div><nav class="site-nav"><a class="nav-link" href="/">Home</a><a class="nav-link" href="/projects">Projects</a><a class="nav-link active" href="/articles">Articles</a><a class="nav-link" href="/#hobbies">Hobbies</a><a class="nav-link" href="/#contact">Contact</a></nav></header>
+            <main class="page-main">
+        <section class="listing-hero">
+            <div class="eyebrow">Portfolio Library</div>
+            <h1>Articles</h1>
+            <p>Writing that helps hiring leaders see how I think, communicate, and grow through work.</p>
+        </section>
+        <section class="content-section">
+            <div class="story-grid"><article class="story-card reveal" data-reveal>
+    <a class="story-card__link" href="/articles/event-tech-clear-communication">
+        <div class="cover-placeholder tone-ocean"><span class="cover-pill">Article</span><strong>WW</strong><p>What Working in Event Tech Is Teaching Me About Clear Communication</p></div>
+        <div class="story-card__content">
+            <div class="eyebrow">Article</div>
+            <h3>What Working in Event Tech Is Teaching Me About Clear Communication</h3>
+            <p>A reflection on how customer experience, timing, and internal alignment all depend on communication that is both precise and empathetic.</p>
+            <div class="story-meta">April 08, 2026 • 3 min read</div>
+            <div class="tag-row"><span class="tag">communication</span><span class="tag">event tech</span><span class="tag">learning</span></div>
+        </div>
+    </a>
+</article><article class="story-card reveal" data-reveal>
+    <a class="story-card__link" href="/articles/why-i-am-documenting-my-work">
+        <div class="cover-placeholder tone-ember"><span class="cover-pill">Article</span><strong>WI</strong><p>Why I Am Documenting My Work in Public</p></div>
+        <div class="story-card__content">
+            <div class="eyebrow">Article</div>
+            <h3>Why I Am Documenting My Work in Public</h3>
+            <p>A note on visibility, confidence, and the importance of making professional growth easier for others to understand.</p>
+            <div class="story-meta">April 05, 2026 • 3 min read</div>
+            <div class="tag-row"><span class="tag">career</span><span class="tag">writing</span><span class="tag">visibility</span></div>
+        </div>
+    </a>
+</article></div>
+        </section>
+        <section class="content-section content-section--cta">
+            <div class="cta-panel reveal" data-reveal>
+                <div>
+                    <div class="eyebrow">More About Me</div>
+                    <h2>Every project and article on this site is editable from the CMS.</h2>
+                </div>
+                <div class="cta-links">
+                    <a class="button" href="/">Back Home</a>
+                    <a class="button button--secondary" href="mailto:hello@roshni-portfolio.com">Contact</a>
+                </div>
+            </div>
+        </section>
+</main>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+</script>
+
+        </body>
+        </html>

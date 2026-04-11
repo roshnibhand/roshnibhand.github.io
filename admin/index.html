@@ -1,0 +1,38 @@
+
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Admin Unavailable Online</title>
+            <meta name="description" content="Local-only admin dashboard">
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body class="site-body admin-view">
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+
+            <main class="page-main">
+        <section class="auth-shell">
+            <div class="auth-card reveal is-visible" data-reveal>
+                <div class="eyebrow">Local Editing</div>
+                <h1>The admin dashboard does not run on GitHub Pages.</h1>
+                <p>To update this site, run the local Python app on your machine, edit content at <code>/admin</code>, then rebuild and push the static files to GitHub.</p>
+            </div>
+        </section>
+        </main>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+</script>
+
+        </body>
+        </html>

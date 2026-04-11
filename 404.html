@@ -1,0 +1,40 @@
+
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Page Not Found</title>
+            <meta name="description" content="Page not found">
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body class="site-body">
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+            <header class="site-header"><div class="brand"><a href="/">RB</a></div><nav class="site-nav"><a class="nav-link" href="/">Home</a><a class="nav-link" href="/projects">Projects</a><a class="nav-link" href="/articles">Articles</a><a class="nav-link" href="/#hobbies">Hobbies</a><a class="nav-link" href="/#contact">Contact</a></nav></header>
+            <main class="page-main">
+<section class="listing-hero">
+    <div class="eyebrow">404</div>
+    <h1>That page does not exist.</h1>
+    <p>The link may be outdated, or the content may have been unpublished.</p>
+    <div class="hero-actions">
+        <a class="button" href="/">Back Home</a>
+        <a class="button button--secondary" href="/articles">Read Articles</a>
+    </div>
+</section>
+</main>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+</script>
+
+        </body>
+        </html>
