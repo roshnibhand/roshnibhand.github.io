@@ -106,7 +106,7 @@ def ensure_storage() -> None:
                 """,
                 (
                     1,
-                    "Roshni Bandola",
+                    "Roshni Bhandula",
                     "Building a visible career in event technology, client experience, and thoughtful execution",
                     "Currently working with Cvent",
                     "India",
