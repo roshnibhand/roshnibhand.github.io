@@ -5,7 +5,7 @@
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <title>Why I Am Documenting My Work in Public | Roshni Bhandula</title>
-            <meta name="description" content="A note on visibility, confidence, and the importance of making professional growth easier for others to understand.">
+            <meta name="description" content="A note on visibility, confidence, and the importance of making professional growth easier for others to understand. Rosh">
             <link rel="stylesheet" href="/static/style.css">
         </head>
         <body class="site-body">
@@ -19,7 +19,7 @@
                 <div class="detail-hero__copy">
                     <div class="eyebrow">Article</div>
                     <h1>Why I Am Documenting My Work in Public</h1>
-                    <p class="hero-lead">A note on visibility, confidence, and the importance of making professional growth easier for others to understand.</p>
+                    <p class="hero-lead">A note on visibility, confidence, and the importance of making professional growth easier for others to understand. Rosh</p>
                     <div class="story-meta">April 05, 2026 • 3 min read</div>
                     <div class="tag-row"><span class="tag">career</span><span class="tag">writing</span><span class="tag">visibility</span></div>
                 </div>
@@ -56,6 +56,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+const params = new URLSearchParams(window.location.search);
+const editorSelector = params.has('edit_entry') ? '#story-editor' : params.has('edit_hobby') ? '#hobby-editor' : '';
+if (editorSelector) {
+  const editor = document.querySelector(editorSelector);
+  const firstField = editor?.querySelector('input[name="title"], textarea[name="description"], textarea[name="body_markdown"]');
+  if (editor) {
+    requestAnimationFrame(() => {
+      editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (firstField) {
+        firstField.focus({ preventScroll: true });
+        if (typeof firstField.select === 'function') {
+          firstField.select();
+        }
+      }
+    });
+  }
+}
 </script>
 
         </body>

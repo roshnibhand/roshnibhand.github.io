@@ -32,6 +32,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+const params = new URLSearchParams(window.location.search);
+const editorSelector = params.has('edit_entry') ? '#story-editor' : params.has('edit_hobby') ? '#hobby-editor' : '';
+if (editorSelector) {
+  const editor = document.querySelector(editorSelector);
+  const firstField = editor?.querySelector('input[name="title"], textarea[name="description"], textarea[name="body_markdown"]');
+  if (editor) {
+    requestAnimationFrame(() => {
+      editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (firstField) {
+        firstField.focus({ preventScroll: true });
+        if (typeof firstField.select === 'function') {
+          firstField.select();
+        }
+      }
+    });
+  }
+}
 </script>
 
         </body>

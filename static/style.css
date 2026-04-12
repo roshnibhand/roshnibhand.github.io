@@ -290,6 +290,19 @@ li {
   font-weight: 600;
 }
 
+.link-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #b56234;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
 .content-section {
   padding: 32px 0 10px;
 }
@@ -657,6 +670,17 @@ li {
   padding: 28px;
 }
 
+.section-card--editor {
+  scroll-margin-top: 28px;
+}
+
+.section-card--editing {
+  border-color: rgba(217, 109, 58, 0.35);
+  box-shadow:
+    0 20px 60px rgba(43, 29, 18, 0.12),
+    0 0 0 4px rgba(217, 109, 58, 0.08);
+}
+
 .stack-form {
   display: grid;
   gap: 16px;
@@ -707,6 +731,19 @@ select:focus {
   font-size: 1.5rem;
 }
 
+.editor-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.editor-status {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
 .checkbox-row {
   display: flex;
   gap: 10px;
@@ -734,6 +771,13 @@ select:focus {
 
 .admin-item-card--story {
   grid-template-columns: 88px minmax(0, 1fr);
+}
+
+.admin-item-card.is-active {
+  border-color: rgba(217, 109, 58, 0.35);
+  box-shadow:
+    0 20px 60px rgba(43, 29, 18, 0.12),
+    0 0 0 4px rgba(217, 109, 58, 0.08);
 }
 
 .admin-item-card__media,
@@ -896,6 +940,11 @@ select:focus {
 
   .detail-sidecard {
     position: static;
+  }
+
+  .editor-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

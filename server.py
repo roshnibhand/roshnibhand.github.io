@@ -812,6 +812,23 @@ def page_shell(title: str, body: str, *, active: str, description: str, admin_vi
         }, { threshold: 0.12 });
 
         document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+        const params = new URLSearchParams(window.location.search);
+        const editorSelector = params.has('edit_entry') ? '#story-editor' : params.has('edit_hobby') ? '#hobby-editor' : '';
+        if (editorSelector) {
+          const editor = document.querySelector(editorSelector);
+          const firstField = editor?.querySelector('input[name="title"], textarea[name="description"], textarea[name="body_markdown"]');
+          if (editor) {
+            requestAnimationFrame(() => {
+              editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              if (firstField) {
+                firstField.focus({ preventScroll: true });
+                if (typeof firstField.select === 'function') {
+                  firstField.select();
+                }
+              }
+            });
+          }
+        }
         </script>
         """
     )
@@ -1077,8 +1094,16 @@ def render_admin_dashboard(conn: sqlite3.Connection, query: dict[str, list[str]]
 
     hobby_form = render_hobby_form(edit_hobby)
     entry_form = render_entry_form(edit_entry)
-    existing_hobbies = "".join(render_hobby_admin_card(hobby) for hobby in hobbies) or '<div class="empty-state">No hobbies added yet.</div>'
-    existing_entries = "".join(render_entry_admin_card(entry) for entry in entries) or '<div class="empty-state">No stories created yet.</div>'
+    hobby_editor_class = " section-card--editing" if edit_hobby else ""
+    entry_editor_class = " section-card--editing" if edit_entry else ""
+    existing_hobbies = (
+        "".join(render_hobby_admin_card(hobby, active_id=edit_hobby["id"] if edit_hobby else None) for hobby in hobbies)
+        or '<div class="empty-state">No hobbies added yet.</div>'
+    )
+    existing_entries = (
+        "".join(render_entry_admin_card(entry, active_id=edit_entry["id"] if edit_entry else None) for entry in entries)
+        or '<div class="empty-state">No stories created yet.</div>'
+    )
     media_grid = "".join(render_media_card(item) for item in media_items) or '<div class="empty-state">No images uploaded yet.</div>'
 
     body = textwrap.dedent(
@@ -1125,7 +1150,7 @@ def render_admin_dashboard(conn: sqlite3.Connection, query: dict[str, list[str]]
                         <div class="eyebrow">Hobbies</div>
                         <h2>Add personal moments and images</h2>
                     </div>
-                    <div class="section-card">{hobby_form}</div>
+                    <div id="hobby-editor" class="section-card section-card--editor{hobby_editor_class}">{hobby_form}</div>
                 </div>
                 <div>
                     <div class="section-heading section-heading--tight">
@@ -1142,7 +1167,7 @@ def render_admin_dashboard(conn: sqlite3.Connection, query: dict[str, list[str]]
                         <div class="eyebrow">Stories</div>
                         <h2>Projects and blog posts</h2>
                     </div>
-                    <div class="section-card">{entry_form}</div>
+                    <div id="story-editor" class="section-card section-card--editor{entry_editor_class}">{entry_form}</div>
                 </div>
                 <div>
                     <div class="section-heading section-heading--tight">
@@ -1217,7 +1242,14 @@ def render_hobby_form(hobby: dict | None) -> str:
         "image_path": "",
         "sort_order": len(ACCENTS),
     }
-    title = "Edit hobby" if hobby.get("id") else "Add a hobby"
+    is_editing = bool(hobby.get("id"))
+    title = f'Editing hobby: {hobby["title"]}' if is_editing else "Add a hobby"
+    intro = (
+        '<p class="editor-status">You are updating this hobby card now. Change the fields below, then save to publish the update.</p>'
+        if is_editing
+        else '<p class="editor-status">Add a title, short description, and optional image to create a new hobby card.</p>'
+    )
+    cancel_link = '<a class="inline-link" href="/admin#hobby-editor">Cancel editing</a>' if is_editing else ""
     image_preview = (
         f'<div class="image-preview"><img src="{html.escape(hobby["image_path"], quote=True)}" alt="{html.escape(hobby["title"], quote=True)}"></div>'
         if hobby["image_path"]
@@ -1230,11 +1262,15 @@ def render_hobby_form(hobby: dict | None) -> str:
     )
     return textwrap.dedent(
         f"""
-        <div class="form-title">{title}</div>
+        <div class="editor-toolbar">
+            <div class="form-title">{html.escape(title)}</div>
+            {cancel_link}
+        </div>
+        {intro}
         <form class="stack-form" method="post" action="/admin/hobbies/save" enctype="multipart/form-data">
             <input type="hidden" name="id" value="{html.escape(str(hobby['id']), quote=True)}">
             <input type="hidden" name="existing_image_path" value="{html.escape(hobby['image_path'], quote=True)}">
-            <label><span>Title</span><input type="text" name="title" value="{html.escape(hobby['title'], quote=True)}" required></label>
+            <label><span>Title</span><input type="text" name="title" value="{html.escape(hobby['title'], quote=True)}" required{' autofocus' if is_editing else ''}></label>
             <label><span>Description</span><textarea name="description" rows="4" required>{html.escape(hobby['description'])}</textarea></label>
             <div class="form-grid">
                 <label>
@@ -1251,7 +1287,7 @@ def render_hobby_form(hobby: dict | None) -> str:
             <label><span>Upload image</span><input type="file" name="image_file" accept="image/*"></label>
             {image_preview}
             {remove_button}
-            <button class="button" type="submit">{'Update Hobby' if hobby.get('id') else 'Add Hobby'}</button>
+            <button class="button" type="submit">{'Update Hobby' if is_editing else 'Add Hobby'}</button>
         </form>
         """
     ).strip()
@@ -1273,7 +1309,15 @@ def render_entry_form(entry: dict | None) -> str:
         "read_time": "4 min read",
         "tags": "",
     }
-    title = "Edit story" if entry.get("id") else "Add a project or article"
+    is_editing = bool(entry.get("id"))
+    story_kind = entry["kind"].title()
+    title = f'Editing {story_kind}: {entry["title"]}' if is_editing else "Add a project or article"
+    intro = (
+        f'<p class="editor-status">This {html.escape(entry["kind"])} is loaded into the editor. Update the content below, then click save.</p>'
+        if is_editing
+        else '<p class="editor-status">Choose project or article, write your story, and save when you are ready to publish it.</p>'
+    )
+    cancel_link = '<a class="inline-link" href="/admin#story-editor">Cancel editing</a>' if is_editing else ""
     image_preview = (
         f'<div class="image-preview"><img src="{html.escape(entry["cover_image"], quote=True)}" alt="{html.escape(entry["title"], quote=True)}"></div>'
         if entry["cover_image"]
@@ -1286,7 +1330,11 @@ def render_entry_form(entry: dict | None) -> str:
     )
     return textwrap.dedent(
         f"""
-        <div class="form-title">{title}</div>
+        <div class="editor-toolbar">
+            <div class="form-title">{html.escape(title)}</div>
+            {cancel_link}
+        </div>
+        {intro}
         <form class="stack-form" method="post" action="/admin/entries/save" enctype="multipart/form-data">
             <input type="hidden" name="id" value="{html.escape(str(entry['id']), quote=True)}">
             <input type="hidden" name="existing_cover_image" value="{html.escape(entry['cover_image'], quote=True)}">
@@ -1304,7 +1352,7 @@ def render_entry_form(entry: dict | None) -> str:
                 </label>
                 <label class="full-span">
                     <span>Title</span>
-                    <input type="text" name="title" value="{html.escape(entry['title'], quote=True)}" required>
+                    <input type="text" name="title" value="{html.escape(entry['title'], quote=True)}" required{' autofocus' if is_editing else ''}>
                 </label>
                 <label>
                     <span>Slug</span>
@@ -1344,7 +1392,7 @@ def render_entry_form(entry: dict | None) -> str:
             {image_preview}
             {remove_button}
             <p class="field-help">Tip: you can upload images in the Media section, then insert them into the body with <code>![Alt text](/uploads/file-name.jpg)</code>.</p>
-            <button class="button" type="submit">{'Update Story' if entry.get('id') else 'Create Story'}</button>
+            <button class="button" type="submit">{'Update Story' if is_editing else 'Create Story'}</button>
         </form>
         """
     ).strip()
@@ -1364,21 +1412,25 @@ def accent_options(current: str) -> str:
     )
 
 
-def render_hobby_admin_card(hobby: dict) -> str:
+def render_hobby_admin_card(hobby: dict, active_id: int | None = None) -> str:
     media = (
         f'<img src="{html.escape(hobby["image_path"], quote=True)}" alt="{html.escape(hobby["title"], quote=True)}">'
         if hobby["image_path"]
         else f'<div class="mini-placeholder tone-{html.escape(hobby["accent"], quote=True)}">{html.escape(hobby["title"][:2].upper())}</div>'
     )
+    active_class = " is-active" if active_id == hobby["id"] else ""
     return textwrap.dedent(
         f"""
-        <article class="admin-item-card">
+        <article class="admin-item-card{active_class}">
             <div class="admin-item-card__media">{media}</div>
             <div class="admin-item-card__content">
                 <h3>{html.escape(hobby["title"])}</h3>
                 <p>{html.escape(hobby["description"])}</p>
                 <div class="admin-actions">
-                    <a class="inline-link" href="/admin?edit_hobby={hobby['id']}#hobbies">Edit</a>
+                    <form method="get" action="/admin">
+                        <input type="hidden" name="edit_hobby" value="{hobby['id']}">
+                        <button class="link-button" type="submit">Edit</button>
+                    </form>
                     <form method="post" action="/admin/hobbies/delete" onsubmit="return confirm('Delete this hobby?');">
                         <input type="hidden" name="id" value="{hobby['id']}">
                         <button class="ghost-button" type="submit">Delete</button>
@@ -1390,12 +1442,13 @@ def render_hobby_admin_card(hobby: dict) -> str:
     ).strip()
 
 
-def render_entry_admin_card(entry: dict) -> str:
+def render_entry_admin_card(entry: dict, active_id: int | None = None) -> str:
     badge = "Featured" if entry["featured"] else "Standard"
     visibility = "Visible" if entry["published"] else "Hidden"
+    active_class = " is-active" if active_id == entry["id"] else ""
     return textwrap.dedent(
         f"""
-        <article class="admin-item-card admin-item-card--story">
+        <article class="admin-item-card admin-item-card--story{active_class}">
             <div class="mini-placeholder tone-{html.escape(entry["accent"], quote=True)}">
                 {html.escape(entry["kind"][0].upper())}
             </div>
@@ -1410,7 +1463,10 @@ def render_entry_admin_card(entry: dict) -> str:
                 <div class="story-meta">{format_date(entry["published_on"])} • {html.escape(entry["read_time"])}</div>
                 <div class="admin-actions">
                     <a class="inline-link" href="{entry_url(entry)}" target="_blank" rel="noreferrer">Open</a>
-                    <a class="inline-link" href="/admin?edit_entry={entry['id']}#stories">Edit</a>
+                    <form method="get" action="/admin">
+                        <input type="hidden" name="edit_entry" value="{entry['id']}">
+                        <button class="link-button" type="submit">Edit</button>
+                    </form>
                     <form method="post" action="/admin/entries/delete" onsubmit="return confirm('Delete this story?');">
                         <input type="hidden" name="id" value="{entry['id']}">
                         <button class="ghost-button" type="submit">Delete</button>
