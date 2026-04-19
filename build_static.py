@@ -98,7 +98,7 @@ def build_static_site() -> None:
             server.render_story_listing(
                 profile,
                 "Projects",
-                "A place to explain what I am building, what I am learning, and how I approach real work.",
+                "Selected case studies in business analytics, customer insights, KPI design, and workflow improvement.",
                 projects,
                 "projects",
             ),
@@ -107,8 +107,8 @@ def build_static_site() -> None:
             "articles/index.html",
             server.render_story_listing(
                 profile,
-                "Articles",
-                "Writing that helps hiring leaders see how I think, communicate, and grow through work.",
+                "Insights",
+                "Writing that shows how I frame problems, communicate insights, and turn ambiguous work into clear narratives.",
                 articles,
                 "articles",
             ),

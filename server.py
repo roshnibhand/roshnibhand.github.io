@@ -107,19 +107,19 @@ def ensure_storage() -> None:
                 (
                     1,
                     "Roshni Bhandula",
-                    "Building a visible career in event technology, client experience, and thoughtful execution",
-                    "Currently working with Cvent",
-                    "India",
-                    "hello@roshni-portfolio.com",
-                    "https://www.linkedin.com/",
-                    "I created this site to turn day-to-day work, learning, and experiments into a portfolio that hiring leaders can actually explore.",
-                    "I am early in my career and deeply motivated by roles where communication, ownership, and digital problem-solving come together. Working with Cvent has pushed me to think more intentionally about customer journeys, execution quality, and the details that make experiences feel polished.",
-                    "What energizes me most is the balance between structure and creativity. I like translating moving pieces into something clearer for customers, teammates, and stakeholders. This website is my space to document that growth through projects, essays, and practical reflections.",
-                    "I am especially interested in opportunities where I can grow across client success, business analysis, operations, project delivery, or product-adjacent work. I want my portfolio to show not just what I have done, but how I think and how I learn.",
-                    "Outside of work, I like hobbies that help me observe small details, stay curious, and keep a healthy rhythm between ambition and creativity.",
-                    "Right now, I am focused on building a stronger public body of work: documenting projects, writing more intentionally, and making my thinking easier to discover.",
-                    "Structured execution\nClient empathy\nClear communication\nCurious learning mindset",
-                    "Client success and experience roles\nBusiness analysis and operations roles\nProject coordination and delivery roles\nProduct-adjacent roles in event tech",
+                    "Turning customer, product, and revenue data into clearer business decisions",
+                    "Lead Analyst at Cvent",
+                    "Jersey City, NJ",
+                    "roshnibhandula@gmail.com",
+                    "https://www.linkedin.com/in/roshni-bhandula",
+                    "I use this portfolio to show how I structure business questions, build analytics frameworks, and translate findings into decisions leaders can act on.",
+                    "I am an analytics professional with 6+ years of experience across business intelligence, performance reporting, customer insights, and workflow improvement. At Cvent, I work on turning complex commercial and product data into decisions that improve customer outcomes, team execution, and revenue performance.",
+                    "What energizes me most is translating noisy business questions into something decision-ready. I enjoy building analysis frameworks, repeatable reporting, and clear narratives that help stakeholders see what is changing, why it matters, and what to do next. This website is where I turn that work into projects, case studies, and practical reflections.",
+                    "I am targeting business analytics, business intelligence, customer insights, and strategy-facing roles where I can combine analytical depth with clear stakeholder communication.",
+                    "A few interests outside work help me stay observant, communicate more clearly, and keep a balanced perspective.",
+                    "Right now, I am refining this portfolio into sharper proof for analytics, BI, and customer insights roles: clearer case studies, better framing, and faster recruiter comprehension.",
+                    "Business intelligence and reporting systems\nCustomer and revenue insights\nStructured stakeholder communication\nWorkflow simplification and automation",
+                    "Business analytics and business intelligence roles\nCustomer insights and strategy roles\nRevenue, commercial, or performance analytics roles\nOperations and process improvement roles",
                 ),
             )
 
@@ -777,15 +777,15 @@ def checked(value: bool) -> str:
 
 def public_navigation(active: str) -> str:
     items = [
-        ("Home", "/"),
-        ("Projects", "/projects"),
-        ("Articles", "/articles"),
-        ("Hobbies", "/#hobbies"),
-        ("Contact", "/#contact"),
+        ("Home", "/", "home"),
+        ("Projects", "/projects", "projects"),
+        ("Insights", "/articles", "articles"),
+        ("About", "/#about", "about"),
+        ("Contact", "/#contact", "contact"),
     ]
     links = []
-    for label, url in items:
-        class_name = "nav-link active" if active == label.lower() else "nav-link"
+    for label, url, key in items:
+        class_name = "nav-link active" if active == key else "nav-link"
         links.append(f'<a class="{class_name}" href="{url}">{label}</a>')
     return "".join(links)
 
@@ -856,22 +856,52 @@ def page_shell(title: str, body: str, *, active: str, description: str, admin_vi
 
 
 def render_home(profile: dict, hobbies: list[dict], projects: list[dict], articles: list[dict]) -> str:
+    focus_items = parse_lines(profile["focus_points"])
+    role_items = parse_lines(profile["roles_of_interest"])
     focus_html = "".join(
-        f'<div class="focus-card reveal" data-reveal><span class="focus-index">0{index + 1}</span><p>{html.escape(item)}</p></div>'
-        for index, item in enumerate(parse_lines(profile["focus_points"]))
+        (
+            '<div class="focus-card reveal" data-reveal>'
+            f'<span class="focus-index">0{index + 1}</span>'
+            f"<h3>{html.escape(item)}</h3>"
+            f"<p>{html.escape(item)} delivered through structured analysis, stakeholder alignment, and decision-ready communication.</p>"
+            "</div>"
+        )
+        for index, item in enumerate(focus_items)
     )
     roles_html = "".join(
-        f"<li>{html.escape(item)}</li>" for item in parse_lines(profile["roles_of_interest"])
+        f"<li>{html.escape(item)}</li>" for item in role_items
     )
+    role_pills = "".join(f'<span class="tag">{html.escape(item)}</span>' for item in role_items)
     hobbies_html = "".join(render_hobby_card(hobby) for hobby in hobbies)
     project_cards = "".join(render_entry_card(entry) for entry in projects[:2])
     article_cards = "".join(render_entry_card(entry) for entry in articles[:2])
+    summary_cards = [
+        ("Experience", "6+ years across BI, reporting, and insights"),
+        ("Current Role", profile["current_role"]),
+        ("Core Strength", "Turning analysis into clear stakeholder decisions"),
+        ("Base", profile["location"]),
+    ]
+    summary_html = "".join(
+        (
+            '<div class="summary-card reveal" data-reveal>'
+            f'<span class="summary-card__label">{html.escape(label)}</span>'
+            f"<strong>{html.escape(value)}</strong>"
+            "</div>"
+        )
+        for label, value in summary_cards
+    )
+    article_heading = "Writing that shows how I frame and communicate the work"
+    article_empty = (
+        '<div class="empty-state">Writing samples will appear here as they are published.</div>'
+        if not article_cards
+        else ""
+    )
     body = textwrap.dedent(
         f"""
         <section class="hero-section">
-            <div class="hero-grid">
+            <div class="hero-shell">
                 <div class="hero-copy reveal is-visible" data-reveal>
-                    <div class="eyebrow">Portfolio • Writing • Projects</div>
+                    <div class="eyebrow">Analytics Portfolio</div>
                     <h1>{html.escape(profile["headline"])}</h1>
                     <p class="hero-lead">{html.escape(profile["hero_note"])}</p>
                     <div class="hero-meta">
@@ -881,82 +911,94 @@ def render_home(profile: dict, hobbies: list[dict], projects: list[dict], articl
                     </div>
                     <div class="hero-actions">
                         <a class="button" href="/projects">View Projects</a>
-                        <a class="button button--secondary" href="/articles">Read Articles</a>
+                        <a class="button button--secondary" href="/articles">Read Insights</a>
                     </div>
                 </div>
-                <aside class="hero-panel reveal" data-reveal>
-                    <div class="hero-panel__label">Current Focus</div>
-                    <p>{html.escape(profile["now_note"])}</p>
-                    <a class="inline-link" href="#about">See more about me</a>
+                <aside class="hero-aside">
+                    <div class="hero-panel reveal" data-reveal>
+                        <div class="hero-panel__label">Current Focus</div>
+                        <p>{html.escape(profile["now_note"])}</p>
+                        <div class="tag-row">{role_pills}</div>
+                    </div>
+                    <div class="hero-panel hero-panel--compact reveal" data-reveal>
+                        <div class="hero-panel__label">What You Will Find Here</div>
+                        <p>Selected case studies, applied analytics thinking, and portfolio-ready proof for business intelligence, customer insights, and strategy-facing roles.</p>
+                        <a class="inline-link" href="#featured-work">Start with featured work</a>
+                    </div>
                 </aside>
             </div>
+            <div class="summary-strip">{summary_html}</div>
+        </section>
+
+        <section class="content-section" id="featured-work">
+            <div class="section-heading reveal" data-reveal>
+                <div class="eyebrow">Featured Case Studies</div>
+                <h2>Selected work that shows how I approach analytics and decisions</h2>
+                <p>These projects are the fastest way to understand how I frame questions, structure analysis, and turn findings into action.</p>
+            </div>
+            <div class="story-grid">{project_cards}</div>
+            <div class="section-link-row"><a class="inline-link" href="/projects">Browse all projects</a></div>
         </section>
 
         <section id="about" class="content-section content-section--split">
             <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">About Me</div>
+                <div class="eyebrow">Professional Overview</div>
                 <h2>{html.escape(profile["name"])}</h2>
                 <p>{html.escape(profile["about_intro"])}</p>
             </div>
             <div class="section-copy reveal" data-reveal>
                 {render_text_block(profile["about_story"])}
                 <div class="callout-card">
-                    <span class="eyebrow">Looking For</span>
+                    <span class="eyebrow">Target Roles</span>
                     <p>{html.escape(profile["looking_for"])}</p>
+                    <div class="tag-row">{role_pills}</div>
                 </div>
             </div>
         </section>
 
         <section class="content-section">
             <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">What I Bring</div>
-                <h2>Signals I want hiring leaders to feel quickly</h2>
+                <div class="eyebrow">Capabilities</div>
+                <h2>How I tend to create value</h2>
+                <p>The common thread across my work is turning ambiguity into structure, then using that structure to help teams move with more clarity.</p>
             </div>
             <div class="focus-grid">{focus_html}</div>
         </section>
 
         <section class="content-section">
             <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Career Direction</div>
-                <h2>Opportunities I am growing toward</h2>
+                <div class="eyebrow">Role Alignment</div>
+                <h2>Where this portfolio is strongest</h2>
             </div>
             <div class="opportunity-card reveal" data-reveal>
                 <ul class="opportunity-list">{roles_html}</ul>
             </div>
         </section>
 
-        <section id="hobbies" class="content-section">
-            <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Hobbies & Moments</div>
-                <h2>The personal side of the portfolio</h2>
-                <p>{html.escape(profile["hobbies_intro"])}</p>
-            </div>
-            <div class="hobby-grid">{hobbies_html}</div>
-        </section>
-
-        <section class="content-section" id="work">
-            <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Featured Projects</div>
-                <h2>Work I can explain in depth</h2>
-            </div>
-            <div class="story-grid">{project_cards}</div>
-            <div class="section-link-row"><a class="inline-link" href="/projects">See all projects</a></div>
-        </section>
-
         <section class="content-section">
             <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Writing</div>
-                <h2>Articles that make my thinking visible</h2>
+                <div class="eyebrow">Writing & Communication</div>
+                <h2>{article_heading}</h2>
+                <p>Strong analysis travels further when it is explained well. These pieces show how I translate observations into clear, useful narratives.</p>
             </div>
-            <div class="story-grid">{article_cards}</div>
-            <div class="section-link-row"><a class="inline-link" href="/articles">Browse all articles</a></div>
+            <div class="story-grid">{article_cards or article_empty}</div>
+            <div class="section-link-row"><a class="inline-link" href="/articles">Browse all insights</a></div>
+        </section>
+
+        <section id="hobbies" class="content-section">
+            <div class="section-heading reveal" data-reveal>
+                <div class="eyebrow">Outside Work</div>
+                <h2>Interests that sharpen perspective beyond the dashboard</h2>
+                <p>{html.escape(profile["hobbies_intro"])}</p>
+            </div>
+            <div class="hobby-grid hobby-grid--compact">{hobbies_html}</div>
         </section>
 
         <section id="contact" class="content-section content-section--cta">
             <div class="cta-panel reveal" data-reveal>
                 <div>
                     <div class="eyebrow">Let’s Connect</div>
-                    <h2>If you are hiring for growth-oriented roles, I would love to talk.</h2>
+                    <h2>If you are hiring in analytics, business intelligence, or customer insights, I would love to connect.</h2>
                 </div>
                 <div class="cta-links">
                     <a class="button" href="mailto:{html.escape(profile["email"], quote=True)}">Email Me</a>
@@ -979,12 +1021,38 @@ def render_story_listing(profile: dict, title: str, description: str, entries: l
     empty_state = ""
     if not cards:
         empty_state = '<div class="empty-state">No stories are published here yet.</div>'
+    if active == "projects":
+        eyebrow = "Selected Work"
+        panel_label = "Recruiter View"
+        panel_copy = (
+            "These case studies are designed to make it easy for hiring teams to see how I approach business questions, KPI design, workflow analysis, and stakeholder-ready recommendations."
+        )
+        cta_heading = "Looking for analytics work that pairs rigor with clarity?"
+        cta_secondary = "Email"
+        cta_secondary_href = f'mailto:{html.escape(profile["email"], quote=True)}'
+        cta_secondary_attrs = ""
+    else:
+        eyebrow = "Insights & Writing"
+        panel_label = "What This Shows"
+        panel_copy = (
+            "These articles show how I explain ambiguity, connect details to larger business context, and communicate with enough clarity for cross-functional stakeholders."
+        )
+        cta_heading = "Want a clearer view of how I think and communicate?"
+        cta_secondary = "LinkedIn"
+        cta_secondary_href = html.escape(profile["linkedin_url"], quote=True)
+        cta_secondary_attrs = ' target="_blank" rel="noreferrer"'
     body = textwrap.dedent(
         f"""
-        <section class="listing-hero">
-            <div class="eyebrow">Portfolio Library</div>
-            <h1>{html.escape(title)}</h1>
-            <p>{html.escape(description)}</p>
+        <section class="listing-hero listing-hero--split">
+            <div class="reveal is-visible" data-reveal>
+                <div class="eyebrow">{eyebrow}</div>
+                <h1>{html.escape(title)}</h1>
+                <p>{html.escape(description)}</p>
+            </div>
+            <aside class="listing-panel reveal" data-reveal>
+                <div class="hero-panel__label">{panel_label}</div>
+                <p>{panel_copy}</p>
+            </aside>
         </section>
         <section class="content-section">
             <div class="story-grid">{cards or empty_state}</div>
@@ -992,12 +1060,12 @@ def render_story_listing(profile: dict, title: str, description: str, entries: l
         <section class="content-section content-section--cta">
             <div class="cta-panel reveal" data-reveal>
                 <div>
-                    <div class="eyebrow">More About Me</div>
-                    <h2>Every project and article on this site is editable from the CMS.</h2>
+                    <div class="eyebrow">Continue The Conversation</div>
+                    <h2>{cta_heading}</h2>
                 </div>
                 <div class="cta-links">
                     <a class="button" href="/">Back Home</a>
-                    <a class="button button--secondary" href="mailto:{html.escape(profile["email"], quote=True)}">Contact</a>
+                    <a class="button button--secondary" href="{cta_secondary_href}"{cta_secondary_attrs}>{cta_secondary}</a>
                 </div>
             </div>
         </section>
@@ -1014,7 +1082,14 @@ def render_story_listing(profile: dict, title: str, description: str, entries: l
 def render_story_detail(profile: dict, entry: dict) -> str:
     tags = "".join(f'<span class="tag">{html.escape(tag)}</span>' for tag in parse_csv(entry["tags"]))
     breadcrumb_parent = "/projects" if entry["kind"] == "project" else "/articles"
-    breadcrumb_label = "Projects" if entry["kind"] == "project" else "Articles"
+    breadcrumb_label = "Projects" if entry["kind"] == "project" else "Insights"
+    related_href = "/articles" if entry["kind"] == "project" else "/projects"
+    related_label = "Read related insights" if entry["kind"] == "project" else "Browse related case studies"
+    role_copy = (
+        "This project reflects the kind of role I am targeting: work that requires clear problem framing, analytical depth, and communication that helps teams act."
+        if entry["kind"] == "project"
+        else "This article reflects how I communicate analytical thinking, explain tradeoffs, and make complex work easier for others to understand."
+    )
     body = textwrap.dedent(
         f"""
         <section class="detail-hero">
@@ -1037,9 +1112,16 @@ def render_story_detail(profile: dict, entry: dict) -> str:
                 {render_markdown(entry["body_markdown"])}
             </article>
             <aside class="detail-sidecard">
-                <div class="eyebrow">Profile Note</div>
-                <p>{html.escape(profile["now_note"])}</p>
-                <a class="inline-link" href="/articles">Read more writing</a>
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Why This Matters</div>
+                    <p>{role_copy}</p>
+                    <div class="tag-row">{tags}</div>
+                </div>
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Continue Exploring</div>
+                    <a class="inline-link" href="{related_href}">{related_label}</a>
+                    <a class="inline-link" href="{html.escape(profile["linkedin_url"], quote=True)}" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+                </div>
             </aside>
         </section>
         """
@@ -1549,7 +1631,7 @@ def render_not_found() -> str:
             <p>The link may be outdated, or the content may have been unpublished.</p>
             <div class="hero-actions">
                 <a class="button" href="/">Back Home</a>
-                <a class="button button--secondary" href="/articles">Read Articles</a>
+                <a class="button button--secondary" href="/articles">Read Insights</a>
             </div>
         </section>
         """
