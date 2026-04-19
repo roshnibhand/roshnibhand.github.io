@@ -103,8 +103,7 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  position: sticky;
-  top: 16px;
+  position: static;
 }
 
 .brand a {
