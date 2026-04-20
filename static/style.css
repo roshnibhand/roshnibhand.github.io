@@ -365,6 +365,12 @@ li {
   align-items: start;
 }
 
+.about-intro-stack {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
 .section-heading {
   margin-bottom: 22px;
   max-width: 760px;
@@ -462,11 +468,20 @@ li {
   box-shadow: 0 28px 56px rgba(16, 24, 38, 0.12);
 }
 
+.about-portrait {
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(255, 253, 248, 0.86);
+  border: 1px solid rgba(23, 34, 53, 0.08);
+  box-shadow: var(--shadow);
+}
+
 .hobby-card__media {
   aspect-ratio: 1.25 / 0.9;
   overflow: hidden;
 }
 
+.about-portrait img,
 .hobby-card__media img,
 .cover-media img,
 .detail-cover img,
@@ -477,10 +492,20 @@ li {
   object-fit: cover;
 }
 
+.about-portrait img {
+  aspect-ratio: 1 / 1;
+  display: block;
+}
+
 .hobby-card__content,
 .story-card__content,
 .media-card__content {
   padding: 22px;
+}
+
+.hobby-card__content a {
+  color: var(--accent-ink);
+  font-weight: 600;
 }
 
 .hobby-placeholder,

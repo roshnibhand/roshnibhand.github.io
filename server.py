@@ -52,6 +52,7 @@ def ensure_storage() -> None:
                 hero_note TEXT NOT NULL,
                 about_intro TEXT NOT NULL,
                 about_story TEXT NOT NULL,
+                about_image TEXT NOT NULL DEFAULT '',
                 looking_for TEXT NOT NULL,
                 hobbies_intro TEXT NOT NULL,
                 now_note TEXT NOT NULL,
@@ -94,15 +95,19 @@ def ensure_storage() -> None:
             """
         )
 
+        profile_columns = {row["name"] for row in conn.execute("PRAGMA table_info(profile)").fetchall()}
+        if "about_image" not in profile_columns:
+            conn.execute("ALTER TABLE profile ADD COLUMN about_image TEXT NOT NULL DEFAULT ''")
+
         profile_exists = conn.execute("SELECT 1 FROM profile WHERE id = 1").fetchone()
         if not profile_exists:
             conn.execute(
                 """
                 INSERT INTO profile (
                     id, name, headline, current_role, location, email, linkedin_url,
-                    hero_note, about_intro, about_story, looking_for, hobbies_intro,
+                    hero_note, about_intro, about_story, about_image, looking_for, hobbies_intro,
                     now_note, focus_points, roles_of_interest
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     1,
@@ -115,6 +120,7 @@ def ensure_storage() -> None:
                     "I use this portfolio to show how I structure business questions, build analytics frameworks, and translate findings into decisions leaders can act on.",
                     "I am an analytics professional with 6+ years of experience across business intelligence, performance reporting, customer insights, and workflow improvement. At Cvent, I work on turning complex commercial and product data into decisions that improve customer outcomes, team execution, and revenue performance.",
                     "What energizes me most is translating noisy business questions into something decision-ready. I enjoy building analysis frameworks, repeatable reporting, and clear narratives that help stakeholders see what is changing, why it matters, and what to do next. This website is where I turn that work into projects, case studies, and practical reflections.",
+                    "",
                     "I am targeting business analytics, business intelligence, customer insights, and strategy-facing roles where I can combine analytical depth with clear stakeholder communication.",
                     "A few interests outside work help me stay observant, communicate more clearly, and keep a balanced perspective.",
                     "Right now, I am refining this portfolio into sharper proof for analytics, BI, and customer insights roles: clearer case studies, better framing, and faster recruiter comprehension.",
@@ -750,13 +756,18 @@ def render_hobby_card(hobby: dict) -> str:
             f"<span>Hobby</span><strong>{html.escape(hobby['title'])}</strong></div>"
         )
     )
+    description_html = (
+        f"<p>{render_inline_markdown(hobby['description'])}</p>"
+        if hobby["description"].strip()
+        else ""
+    )
     return textwrap.dedent(
         f"""
         <article class="hobby-card reveal" data-reveal>
             <div class="hobby-card__media">{media_html}</div>
             <div class="hobby-card__content">
                 <h3>{html.escape(hobby["title"])}</h3>
-                <p>{html.escape(hobby["description"])}</p>
+                {description_html}
             </div>
         </article>
         """
@@ -890,6 +901,13 @@ def render_home(profile: dict, hobbies: list[dict], projects: list[dict], articl
         )
         for label, value in summary_cards
     )
+    about_image_html = (
+        '<div class="about-portrait reveal" data-reveal>'
+        f'<img src="{html.escape(profile["about_image"], quote=True)}" alt="{html.escape(profile["name"], quote=True)} portrait" loading="lazy">'
+        "</div>"
+        if profile.get("about_image")
+        else ""
+    )
     article_heading = "Writing that shows how I frame and communicate the work"
     article_empty = (
         '<div class="empty-state">Writing samples will appear here as they are published.</div>'
@@ -941,10 +959,13 @@ def render_home(profile: dict, hobbies: list[dict], projects: list[dict], articl
         </section>
 
         <section id="about" class="content-section content-section--split">
-            <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Professional Overview</div>
-                <h2>{html.escape(profile["name"])}</h2>
-                <p>{html.escape(profile["about_intro"])}</p>
+            <div class="about-intro-stack">
+                <div class="section-heading reveal" data-reveal>
+                    <div class="eyebrow">Professional Overview</div>
+                    <h2>{html.escape(profile["name"])}</h2>
+                    <p>{html.escape(profile["about_intro"])}</p>
+                </div>
+                {about_image_html}
             </div>
             <div class="section-copy reveal" data-reveal>
                 {render_text_block(profile["about_story"])}
@@ -1303,6 +1324,7 @@ def render_profile_form(profile: dict) -> str:
                 <label class="full-span"><span>Hero note</span><textarea name="hero_note" rows="3" required>{html.escape(profile['hero_note'])}</textarea></label>
                 <label class="full-span"><span>About intro</span><textarea name="about_intro" rows="4" required>{html.escape(profile['about_intro'])}</textarea></label>
                 <label class="full-span"><span>About story</span><textarea name="about_story" rows="6" required>{html.escape(profile['about_story'])}</textarea></label>
+                <label class="full-span"><span>About image URL</span><input type="text" name="about_image" value="{html.escape(profile.get('about_image', ''), quote=True)}" placeholder="/uploads/profile-image.jpg"></label>
                 <label class="full-span"><span>Looking for</span><textarea name="looking_for" rows="4" required>{html.escape(profile['looking_for'])}</textarea></label>
                 <label class="full-span"><span>Hobbies intro</span><textarea name="hobbies_intro" rows="3" required>{html.escape(profile['hobbies_intro'])}</textarea></label>
                 <label class="full-span"><span>Current focus note</span><textarea name="now_note" rows="3" required>{html.escape(profile['now_note'])}</textarea></label>
@@ -1834,7 +1856,7 @@ class PortfolioHandler(BaseHTTPRequestHandler):
                     """
                     UPDATE profile SET
                         name = ?, headline = ?, current_role = ?, location = ?, email = ?, linkedin_url = ?,
-                        hero_note = ?, about_intro = ?, about_story = ?, looking_for = ?, hobbies_intro = ?,
+                        hero_note = ?, about_intro = ?, about_story = ?, about_image = ?, looking_for = ?, hobbies_intro = ?,
                         now_note = ?, focus_points = ?, roles_of_interest = ?
                     WHERE id = 1
                     """,
@@ -1848,6 +1870,7 @@ class PortfolioHandler(BaseHTTPRequestHandler):
                         parse_form_value(form, "hero_note"),
                         parse_form_value(form, "about_intro"),
                         parse_form_value(form, "about_story"),
+                        parse_form_value(form, "about_image"),
                         parse_form_value(form, "looking_for"),
                         parse_form_value(form, "hobbies_intro"),
                         parse_form_value(form, "now_note"),
