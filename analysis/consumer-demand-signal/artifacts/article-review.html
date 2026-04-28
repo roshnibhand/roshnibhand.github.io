@@ -1,0 +1,299 @@
+
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Consumer Spending Is Not One Story | Roshni Bhandula</title>
+            <meta name="description" content="A detailed walkthrough of how I used Opportunity Insights and FRED data to analyze category resilience, income-based spending differences, and what those signals mean for consumer strategy.">
+            <link rel="stylesheet" href="file:///Users/roshnibhandula/rosh-website/static/style.css">
+        </head>
+        <body class="site-body">
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+            <header class="site-header"><div class="brand"><a href="/">RB</a></div><nav class="site-nav"><a class="nav-link" href="/">Home</a><a class="nav-link" href="/projects">Projects</a><a class="nav-link active" href="/articles">Insights</a><a class="nav-link" href="/#about">About</a><a class="nav-link" href="/#contact">Contact</a></nav></header>
+            <main class="page-main">
+        <section class="detail-hero">
+            <div class="breadcrumb"><a href="/">Home</a> / <a href="/articles">Insights</a></div>
+            <div class="detail-hero__grid">
+                <div class="detail-hero__copy">
+                    <div class="eyebrow">Article</div>
+                    <h1>Consumer Spending Is Not One Story</h1>
+                    <p class="hero-lead">A detailed walkthrough of how I used Opportunity Insights and FRED data to analyze category resilience, income-based spending differences, and what those signals mean for consumer strategy.</p>
+                    <div class="story-meta">April 28, 2026 • 14 min read</div>
+                    <div class="tag-row"><span class="tag">consumer insights</span><span class="tag">spending trends</span><span class="tag">income segmentation</span><span class="tag">retail strategy</span><span class="tag">analytics</span></div>
+                </div>
+                <div class="detail-cover">
+                    <div class="cover-media"><img src="consumer-demand-signal-cover.svg" alt="Consumer Spending Is Not One Story" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+        <section class="detail-layout">
+            <article class="article-body">
+                <h2>Introduction</h2>
+<p>Consumer spending is one of the most watched business signals in the U.S. economy, but it is also one of the easiest to flatten into a misleading headline.</p>
+<p>Depending on the week, the story can sound like:</p>
+<ul><li>the consumer is finally weakening</li><li>the consumer is more resilient than expected</li><li>inflation is making spending look stronger than it really is</li><li>high-income households are carrying everything</li></ul>
+<p>The problem is that all of those statements can be directionally true at the same time and still be incomplete.</p>
+<p>If I were supporting a consumer business, I would not want a one-line answer to the question "How is the consumer doing?" I would want a more useful answer to a harder question:</p>
+<p><strong>Where is demand actually holding up, where is it still under pressure, and how does that change when I look at category performance and income mix together?</strong></p>
+<p>That is the question behind this project.</p>
+<p>I built it as a consumer analytics case study using live public data from Opportunity Insights and FRED. The goal was not just to produce a few charts, but to create a piece of analysis that explains the process clearly enough for someone seeing it for the first time to follow:</p>
+<ul><li>what question I asked</li><li>why I chose the data sources I used</li><li>how I transformed the data</li><li>what each chart is intended to answer</li><li>what the results mean from a business perspective</li></ul>
+<p>This article is the long-form explanation of that process.</p>
+<h2>The business question</h2>
+<p>At a high level, I wanted to test four ideas.</p>
+<ol><li>Which consumer categories still look structurally strong after accounting for inflation?</li><li>Which categories look weaker than they were before the pandemic?</li><li>Do lower-income and higher-income consumers show the same spending pattern?</li><li>Are the fastest-growing segments also the segments that matter most in absolute dollar terms?</li></ol>
+<p>Those questions matter because they lead to very different business actions.</p>
+<p>If e-commerce is still structurally stronger than most categories, that matters for channel investment, retention strategy, and digital experience.</p>
+<p>If restaurants and experience-adjacent categories are holding up better than furniture or apparel, that matters for promotional timing, inventory assumptions, and forecasting conversations.</p>
+<p>If lower-income ZIP codes are recovering faster relative to their baseline, but higher-income ZIP codes still contribute more of the total spend, that matters for positioning, pricing, value messaging, and customer prioritization.</p>
+<p>In other words, this is not really a project about "the consumer" as one monolithic group. It is a project about how to break a broad macro story into a set of decisions that would actually help a commercial team act.</p>
+<h2>Why I chose these data sources</h2>
+<p>I wanted a mix of public sources that were credible, current, and useful for a business audience rather than only an academic one.</p>
+<h3>Opportunity Insights Economic Tracker</h3>
+<p>The most important source in this project was the <a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/data/Affinity%20-%20National%20-%20Monthly.csv" target="_blank" rel="noreferrer">Opportunity Insights Economic Tracker monthly Affinity consumer spending file</a>.</p>
+<p>I chose it because it solves a major problem that often comes up in public consumer analysis: most macro datasets tell us what is happening overall, but not enough about <strong>who</strong> is driving the movement.</p>
+<p>This file includes seasonally adjusted consumer spending change relative to a January 2020 baseline across categories such as:</p>
+<ul><li>all spending</li><li>grocery</li><li>restaurants and hotels</li><li>apparel and accessories</li><li>general merchandise</li><li>retail excluding grocery</li></ul>
+<p>More importantly, it breaks those categories into income quartiles based on the ZIP code where the cardholder lives. That gave me a practical way to compare how lower-income and higher-income areas were moving.</p>
+<p>I also used the <a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/data/Affinity%20Income%20Shares%20-%20National%20-%202020.csv" target="_blank" rel="noreferrer">Opportunity Insights January 2020 income-share reference file</a>. That file provides the baseline share of card spending by income quartile and helped me answer a subtle but important question:</p>
+<p><strong>Is a segment growing faster because it is becoming more commercially important, or is it simply rebounding from a smaller base?</strong></p>
+<p>To make sure I interpreted the fields correctly, I also reviewed:</p>
+<ul><li>the <a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/docs/oi_tracker_data_documentation.md" target="_blank" rel="noreferrer">Opportunity Insights data documentation</a></li><li>the <a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/docs/oi_tracker_data_dictionary.md" target="_blank" rel="noreferrer">Opportunity Insights variable dictionary</a></li></ul>
+<h3>FRED retail sales series</h3>
+<p>The second major source was FRED, the Federal Reserve Economic Data platform. I used monthly U.S. retail sales series for:</p>
+<ul><li><a href="https://fred.stlouisfed.org/series/MRTSSM4541USN" target="_blank" rel="noreferrer">E-commerce retail sales</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM452USN" target="_blank" rel="noreferrer">General merchandise stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM44511USN" target="_blank" rel="noreferrer">Grocery stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM7225USN" target="_blank" rel="noreferrer">Food services and drinking places</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM4481USN" target="_blank" rel="noreferrer">Clothing stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM442USN" target="_blank" rel="noreferrer">Furniture stores</a></li></ul>
+<p>I picked those categories because they provide a useful mix of:</p>
+<ul><li>convenience-led behavior</li><li>routine/essential demand</li><li>experience spending</li><li>discretionary goods</li></ul>
+<p>That makes them useful for comparison instead of only describing one narrow pocket of spending.</p>
+<h3>CPI and consumer sentiment</h3>
+<p>I added two supporting series from FRED:</p>
+<ul><li><a href="https://fred.stlouisfed.org/series/CPIAUCSL" target="_blank" rel="noreferrer">Consumer Price Index</a></li><li><a href="https://fred.stlouisfed.org/series/UMCSENT" target="_blank" rel="noreferrer">University of Michigan Consumer Sentiment</a></li></ul>
+<p>The CPI series was necessary because raw retail sales are nominal, which means inflation can make demand look healthier than it really is. I used CPI to convert the retail sales into a real-sales view.</p>
+<p>The sentiment series was useful for a different reason. I wanted to compare <strong>what consumers were saying</strong> with <strong>what consumers were still doing</strong>. That contrast is often where the more interesting business story appears.</p>
+<h2>A quick note on why the baselines are different</h2>
+<p>This is one of the most important methodological points in the project, so I want to say it very clearly.</p>
+<p>The two main datasets do not use the same baseline:</p>
+<ul><li>Opportunity Insights reports spending change relative to <strong>January 2020</strong></li><li>My retail category index from FRED is normalized to <strong>2019 average = 100</strong></li></ul>
+<p>That is intentional, not a mistake.</p>
+<p>I kept the Opportunity Insights framing because the dataset itself is already structured around that baseline and it is the cleanest way to preserve the meaning of the published series.</p>
+<p>I used a 2019 baseline for the retail category index because I wanted a stable pre-pandemic benchmark for real category demand.</p>
+<p>That means I do <strong>not</strong> directly compare the numeric levels across the two systems as if they were the same measure. Instead, I use them for two different but complementary purposes:</p>
+<ul><li>the FRED-based index answers: "How does category demand compare with a pre-pandemic real-sales baseline?"</li><li>the Opportunity Insights data answers: "How does spending by income group compare with the January 2020 starting point?"</li></ul>
+<p>Together, they create a richer picture than either source could on its own.</p>
+<h2>How I built the analysis</h2>
+<p>I wanted the analysis to be reproducible, transparent, and easy to extend. So I built a local Python pipeline that downloads the public files, processes them, and generates the draft outputs.</p>
+<h3>Step 1. Pull the live source files</h3>
+<p>The script downloads the source files directly from their public URLs and stores them inside the project workspace.</p>
+<p>That matters for two reasons:</p>
+<ul><li>the project is easy to rerun later with updated data</li><li>the analysis is traceable back to the exact sources used</li></ul>
+<h3>Step 2. Convert everything to a common monthly structure</h3>
+<p>The files are all time series, but they do not arrive in the same format.</p>
+<ul><li>Opportunity Insights provides a monthly indexed series</li><li>FRED retail files are nominal sales levels</li><li>CPI and sentiment are additional monthly series</li></ul>
+<p>I standardized the date fields so that all of them could be aligned by month before I started any calculations.</p>
+<h3>Step 3. Deflate the FRED retail series</h3>
+<p>This is one of the most important transformation steps in the project.</p>
+<p>Raw retail sales levels can rise simply because prices rose. That does not necessarily mean consumers bought more in real terms.</p>
+<p>To fix that, I deflated each retail category using CPI and then indexed the resulting real values to <strong>2019 average = 100</strong>.</p>
+<p>This creates a cleaner interpretation:</p>
+<ul><li>above 100 means the category is above its 2019 real baseline</li><li>below 100 means the category is below its 2019 real baseline</li></ul>
+<p>That let me compare categories in a way that is much more useful than raw nominal dollar levels.</p>
+<h3>Step 4. Address a minor continuity issue</h3>
+<p>The CPI series had a missing observation for October 2025 in the downloaded file. To keep the monthly index continuous, I interpolated that single point using the adjacent months.</p>
+<p>I am deliberately including that detail because small adjustments like that should not be hidden. The effect on the broader analysis is minor, but the process should still be transparent.</p>
+<h3>Step 5. Build the income-segment view</h3>
+<p>The Opportunity Insights file already contains spending change by income quartile, so I used it to build a category-by-quartile comparison for the latest available month.</p>
+<p>That gives an immediate answer to the question:</p>
+<p><strong>Which consumer groups are showing stronger relative spending growth in each category?</strong></p>
+<h3>Step 6. Estimate the latest income share mix</h3>
+<p>This was an important extra step because growth rate alone can be misleading.</p>
+<p>Suppose one segment grows faster than another. That still does not tell us whether it now represents more of total spending. A smaller segment can post a stronger growth rate and still remain smaller in absolute terms.</p>
+<p>To avoid that trap, I started from the January 2020 baseline income shares provided by Opportunity Insights and re-weighted those shares using the latest all-spending growth values.</p>
+<p>This created a simple estimate of current spend share by income quartile. It is not meant to replace a full market-size model, but it is very useful for separating:</p>
+<ul><li>relative momentum</li><li>absolute contribution</li></ul>
+<p>That distinction is central to good consumer analysis.</p>
+<h2>What I created</h2>
+<p>The project produces four main outputs.</p>
+<h3>1. Real retail demand by category</h3>
+<p>This chart shows six categories of U.S. retail demand after adjusting for inflation and indexing to a 2019 baseline.</p>
+<p>This is the best chart for understanding structural category resilience.</p>
+<h3>2. Income-segment spending heatmap</h3>
+<p>This heatmap shows the latest Opportunity Insights category growth by income quartile.</p>
+<p>This is the best chart for understanding how the spending story changes when I stop treating the consumer as a single group.</p>
+<h3>3. Income-share slope chart</h3>
+<p>This chart compares January 2020 baseline spend share by income quartile with an estimated latest share based on current all-spending growth.</p>
+<p>This is the best chart for explaining why "fastest-growing segment" and "largest spending segment" are not the same thing.</p>
+<h3>4. Website-ready written narrative</h3>
+<p>I also created a draft project summary and article so the analysis is understandable to someone who is not reading the code, the data files, or the charts in isolation.</p>
+<p>That matters because a portfolio project should communicate well to multiple audiences:</p>
+<ul><li>recruiters</li><li>hiring managers</li><li>interviewers</li><li>business stakeholders</li><li>other analysts</li></ul>
+<h2>How to read the results</h2>
+<p>Before I get into the findings, it helps to frame what each source is really telling us.</p>
+<p>The FRED retail view is most useful for answering:</p>
+<ul><li>what categories are structurally stronger or weaker in real terms?</li><li>where has demand shifted over the last several years?</li></ul>
+<p>The Opportunity Insights view is most useful for answering:</p>
+<ul><li>which income segments are showing more momentum?</li><li>are growth patterns different across categories?</li></ul>
+<p>The share model is most useful for answering:</p>
+<ul><li>does stronger relative growth also mean greater dollar concentration?</li></ul>
+<p>Thinking about the project that way helps prevent over-interpreting any single chart.</p>
+<h2>Finding 1. E-commerce still looks like the clearest structural winner</h2>
+<p>After adjusting for inflation and normalizing each series to its 2019 average, e-commerce stood at <strong>159.2</strong> in <strong>February 2026</strong>.</p>
+<p>That means real e-commerce sales were <strong>+59.2% above</strong> their 2019 benchmark.</p>
+<p>It also gained <strong>+9.73 percentage points</strong> of share inside the tracked retail basket, which was the largest positive shift among the categories in the analysis.</p>
+<p>That matters because it does not look like a temporary distortion anymore. It looks like a lasting change in how consumers prefer to buy.</p>
+<p>If I were supporting a retailer, marketplace, or consumer platform, I would treat that as evidence that convenience continues to be a strategic advantage, not just an operational channel.</p>
+<h2>Finding 2. Experience-oriented demand held up better than heavier discretionary goods</h2>
+<p>Restaurants were at <strong>115.8</strong> in February 2026, which means they remained <strong>+15.8% above</strong> their 2019 real-sales baseline.</p>
+<p>Furniture, by contrast, was at <strong>79.3</strong>, or <strong>-20.7% below</strong> baseline.</p>
+<p>Clothing was at <strong>77.6</strong>, or <strong>-22.4% below</strong> baseline.</p>
+<p>General merchandise was also below baseline at <strong>88.7</strong>, or <strong>-11.3%</strong>.</p>
+<p>This was one of the most useful pattern splits in the project because it suggests consumers are not simply "strong" or "weak." They are selective.</p>
+<p>Some categories tied to convenience, routine, and experiences continue to hold up relatively well. Categories tied to heavier discretionary purchases still look much more pressured.</p>
+<p>That difference matters for:</p>
+<ul><li>forecasting assumptions</li><li>promotional planning</li><li>category messaging</li><li>pricing and elasticity conversations</li></ul>
+<h2>Finding 3. Weak consumer confidence did not translate into uniform demand weakness</h2>
+<p>The University of Michigan consumer sentiment reading was <strong>53.3 in March 2026</strong>.</p>
+<p>That places it very close to the low end of its post-2000 history. In this project, it lands near the bottom of the observed distribution for the modern period.</p>
+<p>If I only looked at that sentiment measure, I might expect demand to look broadly soft across the board.</p>
+<p>But the retail category data does not support a single uniform pullback story.</p>
+<p>Instead, it shows a split:</p>
+<ul><li>e-commerce remains very strong</li><li>restaurants remain positive versus pre-pandemic baseline</li><li>grocery is closer to flat in real terms</li><li>furniture and clothing remain more pressured</li></ul>
+<p>This is exactly why I wanted sentiment in the project. It acts as a useful reminder that stated confidence and observed spending do not move in a perfectly simple way.</p>
+<p>For business teams, that is important. It means macro headlines should inform decision-making, but they should not replace category-level analysis.</p>
+<h2>Finding 4. Lower-income ZIP codes showed stronger relative growth in several categories</h2>
+<p>In the <strong>March 2026</strong> Opportunity Insights release:</p>
+<ul><li>all spending was <strong>+48.3%</strong> for Q1 low-income ZIP codes versus <strong>+28.6%</strong> for Q4 high-income ZIP codes</li><li>restaurants and hotels were <strong>+43.1%</strong> for Q1 versus <strong>+20.9%</strong> for Q4</li><li>general merchandise was <strong>+110.0%</strong> for Q1 versus <strong>+74.0%</strong> for Q4</li><li>retail excluding grocery was <strong>+55.2%</strong> for Q1 versus <strong>+33.0%</strong> for Q4</li></ul>
+<p>That tells me that lower-income ZIP codes were showing stronger <strong>relative growth versus their own baseline</strong> in multiple categories.</p>
+<p>This is an important point, because a lot of consumer commentary implicitly assumes that higher-income households are the only relevant story. This dataset suggests the reality is more nuanced.</p>
+<p>Momentum can be stronger in lower-income areas even if those areas are not the biggest spend contributors in absolute terms.</p>
+<h2>Finding 5. Grocery behaved differently from other categories</h2>
+<p>One of the subtler findings in the income-segment data is grocery.</p>
+<p>Grocery did not show the same large income gap as categories like general merchandise or restaurants and hotels.</p>
+<p>In March 2026:</p>
+<ul><li>Q1 grocery spending was <strong>+20.5%</strong></li><li>Q4 grocery spending was <strong>+19.5%</strong></li></ul>
+<p>That relative similarity makes sense. Grocery is more routine and less discretionary than many other categories in the analysis.</p>
+<p>This is a good example of why category context matters. A high gap in one category may reflect promotional sensitivity, channel behavior, or value-seeking, while a smaller gap in another category may simply reflect the fact that it serves a more universal spending need.</p>
+<h2>Finding 6. High-income ZIP codes still carried the largest share of spend</h2>
+<p>This is where I think the project becomes more useful than a simple growth table.</p>
+<p>The January 2020 income-share file shows that baseline card spending was distributed roughly like this:</p>
+<ul><li>Q1 low-income ZIP codes: <strong>14.4%</strong></li><li>Q2: <strong>21.5%</strong></li><li>Q3: <strong>27.1%</strong></li><li>Q4 high-income ZIP codes: <strong>37.0%</strong></li></ul>
+<p>So even before looking at current growth, higher-income ZIP codes were starting from a much larger share of total spending.</p>
+<p>After re-weighting those baseline shares using the latest all-spending growth rates, the estimated latest mix becomes:</p>
+<ul><li>Q1: <strong>15.6%</strong></li><li>Q2: <strong>22.4%</strong></li><li>Q3: <strong>27.1%</strong></li><li>Q4: <strong>34.8%</strong></li></ul>
+<p>This means two things are true at the same time:</p>
+<ul><li>lower-income ZIP codes are showing faster relative growth</li><li>higher-income ZIP codes still account for the largest share of total spending</li></ul>
+<p>That is the kind of nuance that matters in real business decisions. A team that only watches growth rates might overstate the size of the lower-income opportunity. A team that only watches share might miss an important change in momentum.</p>
+<p>The better approach is to hold both views at once.</p>
+<h2>What the charts are meant to communicate</h2>
+<h3>The retail demand chart</h3>
+<p>This chart is the structural view.</p>
+<p>It answers:</p>
+<ul><li>which categories have truly moved above pre-pandemic real demand?</li><li>which ones are still below where they used to be?</li></ul>
+<p>Its main value is that it strips away some of the confusion created by nominal growth and inflation.</p>
+<h3>The income heatmap</h3>
+<p>This chart is the segmentation view.</p>
+<p>It answers:</p>
+<ul><li>where is spending growth strongest by income group?</li><li>which categories show the widest spread between lower-income and higher-income consumers?</li></ul>
+<p>Its main value is that it makes the spending story more human and more commercially useful.</p>
+<h3>The income share slope chart</h3>
+<p>This chart is the interpretation guardrail.</p>
+<p>It answers:</p>
+<ul><li>does faster growth automatically mean a segment now dominates spend?</li></ul>
+<p>Its main value is that it prevents an easy but common analytical mistake.</p>
+<h2>What this means for a consumer business</h2>
+<p>If I were presenting this analysis to a brand, retailer, marketplace, or strategy team, I would convert the findings into a short set of decisions.</p>
+<h3>1. Do not treat all discretionary demand the same way</h3>
+<p>Furniture, clothing, and restaurants should not be grouped into one broad "discretionary" bucket without qualification.</p>
+<p>Restaurants are showing a very different demand profile from furniture and clothing. Treating them the same would flatten the strategy.</p>
+<h3>2. Convenience still deserves strategic investment</h3>
+<p>The strength of e-commerce suggests convenience is not just a pandemic-era distortion. It remains a central part of how consumers want to shop.</p>
+<p>That should influence:</p>
+<ul><li>channel strategy</li><li>lifecycle communication</li><li>customer journey design</li><li>retention thinking</li></ul>
+<h3>3. Lower-income growth may matter more than broad assumptions suggest</h3>
+<p>If lower-income ZIP codes are showing relatively stronger growth in general merchandise and other value-sensitive categories, then there may be more opportunity there than a top-line income narrative would suggest.</p>
+<p>That does not automatically mean a business should pivot entirely toward that segment, but it does mean the segment deserves close attention.</p>
+<h3>4. Scale and momentum should be tracked separately</h3>
+<p>This is one of the strongest takeaways from the project.</p>
+<p>Businesses should separately track:</p>
+<ul><li>who is growing fastest</li><li>who is contributing the most dollars</li></ul>
+<p>Those are related questions, but they are not the same question.</p>
+<h2>Limitations of the project</h2>
+<p>Even though the project is useful, it is important to be clear about what it does not do.</p>
+<h3>It is a national view</h3>
+<p>This analysis is built on national monthly data. It does not capture how the story may vary across states, cities, or local markets.</p>
+<h3>It uses public external data only</h3>
+<p>That means the project is great for market context, but it is not a substitute for internal transaction, loyalty, CRM, pricing, or marketing performance data.</p>
+<h3>The income share refresh is an estimate</h3>
+<p>The latest spend-share view is estimated by re-weighting published baseline shares with current all-spending growth. It is a useful interpretation tool, but not a perfect substitute for a fully published current-period share file.</p>
+<h3>Category definitions are source-specific</h3>
+<p>Opportunity Insights and FRED do not define categories in exactly the same way. I use them side by side to answer related questions, not to force a false one-to-one reconciliation.</p>
+<h2>What I would do next</h2>
+<p>If I extended this into a larger analytics product or business review, I would add:</p>
+<ul><li>a longer time-series view of income-quartile trends by category</li><li>state or metro cuts to identify regional differences</li><li>event markers for inflation peaks, stimulus periods, and rate changes</li><li>internal business overlays such as brand sales, paid media response, or conversion metrics</li></ul>
+<p>That would move the project from a strong external consumer signal framework into a more operational decision system.</p>
+<h2>Why this project matters for my work</h2>
+<p>I built this project to reflect the kind of analytics work I want to do more of.</p>
+<p>What I enjoy most is not simply pulling data or making dashboards. It is:</p>
+<ul><li>framing the right business question</li><li>finding credible data that actually helps answer it</li><li>combining multiple signals without confusing them</li><li>designing metrics that reduce analytical shortcuts</li><li>translating the results into something a business team can use</li></ul>
+<p>That is what I wanted this project to show.</p>
+<p>For me, good analytics should make a complex topic easier to reason about without oversimplifying it. Consumer demand is a perfect example of that challenge.</p>
+<h2>Final takeaway</h2>
+<p>The main lesson from this project is simple:</p>
+<p><strong>Consumer spending is not one story.</strong></p>
+<p>A soft confidence reading does not automatically mean weak demand everywhere.</p>
+<p>Fast growth in one segment does not automatically mean that segment now carries the business.</p>
+<p>And a top-line consumer narrative is rarely enough for real decision-making.</p>
+<p>The more useful view is one that separates:</p>
+<ul><li>category resilience</li><li>income-segment momentum</li><li>spend concentration</li></ul>
+<p>Once those are separated, the story becomes more actionable.</p>
+<p>That is the type of analysis I wanted this project to demonstrate.</p>
+<h2>Research notes and sources</h2>
+<ul><li><a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/data/Affinity%20-%20National%20-%20Monthly.csv" target="_blank" rel="noreferrer">Opportunity Insights Economic Tracker monthly Affinity data</a></li><li><a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/docs/oi_tracker_data_documentation.md" target="_blank" rel="noreferrer">Opportunity Insights methodology and processing notes</a></li><li><a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/docs/oi_tracker_data_dictionary.md" target="_blank" rel="noreferrer">Opportunity Insights variable dictionary</a></li><li><a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/data/Affinity%20Income%20Shares%20-%20National%20-%202020.csv" target="_blank" rel="noreferrer">Opportunity Insights January 2020 income-share file</a></li><li><a href="https://fred.stlouisfed.org/series/UMCSENT" target="_blank" rel="noreferrer">FRED consumer sentiment series</a></li><li><a href="https://fred.stlouisfed.org/series/CPIAUCSL" target="_blank" rel="noreferrer">FRED CPI series</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM4541USN" target="_blank" rel="noreferrer">FRED e-commerce retail sales</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM7225USN" target="_blank" rel="noreferrer">FRED restaurants and drinking places</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM4481USN" target="_blank" rel="noreferrer">FRED clothing stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM442USN" target="_blank" rel="noreferrer">FRED furniture stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM44511USN" target="_blank" rel="noreferrer">FRED grocery stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM452USN" target="_blank" rel="noreferrer">FRED general merchandise stores</a></li></ul>
+            </article>
+            <aside class="detail-sidecard">
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Why This Matters</div>
+                    <p>This article reflects how I communicate analytical thinking, explain tradeoffs, and make complex work easier for others to understand.</p>
+                    <div class="tag-row"><span class="tag">consumer insights</span><span class="tag">spending trends</span><span class="tag">income segmentation</span><span class="tag">retail strategy</span><span class="tag">analytics</span></div>
+                </div>
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Continue Exploring</div>
+                    <a class="inline-link" href="/projects">Browse related case studies</a>
+                    <a class="inline-link" href="https://www.linkedin.com/in/roshni-bhandula" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+                </div>
+            </aside>
+        </section>
+</main>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+const params = new URLSearchParams(window.location.search);
+const editorSelector = params.has('edit_entry') ? '#story-editor' : params.has('edit_hobby') ? '#hobby-editor' : '';
+if (editorSelector) {
+  const editor = document.querySelector(editorSelector);
+  const firstField = editor?.querySelector('input[name="title"], textarea[name="description"], textarea[name="body_markdown"]');
+  if (editor) {
+    requestAnimationFrame(() => {
+      editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (firstField) {
+        firstField.focus({ preventScroll: true });
+        if (typeof firstField.select === 'function') {
+          firstField.select();
+        }
+      }
+    });
+  }
+}
+</script>
+
+        </body>
+        </html>

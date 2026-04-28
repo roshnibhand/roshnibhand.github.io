@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760" role="img" aria-label="Real Retail Demand by Category">
+<rect width="100%" height="100%" fill="#f7f3eb"/>
+<rect x="32" y="32" width="1056" height="696" rx="28" fill="#fffdf9" stroke="#e8dcc7"/>
+<text x="84.0" y="92.0" font-size="34" font-weight="700" fill="#111827" text-anchor="start" font-family="Georgia, Times New Roman, serif">Real Retail Demand by Category</text>
+<text x="84.0" y="124.0" font-size="16" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Georgia, Times New Roman, serif">CPI-adjusted monthly retail sales indexed to the 2019 average. Latest common month: February 2026.</text>
+<line x1="100" y1="670.0" x2="940" y2="670.0" stroke="#ebe5db"/>
+<text x="84.0" y="675.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">10</text>
+<line x1="100" y1="645.0" x2="940" y2="645.0" stroke="#ebe5db"/>
+<text x="84.0" y="650.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">20</text>
+<line x1="100" y1="620.0" x2="940" y2="620.0" stroke="#ebe5db"/>
+<text x="84.0" y="625.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">30</text>
+<line x1="100" y1="595.0" x2="940" y2="595.0" stroke="#ebe5db"/>
+<text x="84.0" y="600.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">40</text>
+<line x1="100" y1="570.0" x2="940" y2="570.0" stroke="#ebe5db"/>
+<text x="84.0" y="575.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">50</text>
+<line x1="100" y1="545.0" x2="940" y2="545.0" stroke="#ebe5db"/>
+<text x="84.0" y="550.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">60</text>
+<line x1="100" y1="520.0" x2="940" y2="520.0" stroke="#ebe5db"/>
+<text x="84.0" y="525.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">70</text>
+<line x1="100" y1="495.0" x2="940" y2="495.0" stroke="#ebe5db"/>
+<text x="84.0" y="500.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">80</text>
+<line x1="100" y1="470.0" x2="940" y2="470.0" stroke="#ebe5db"/>
+<text x="84.0" y="475.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">90</text>
+<line x1="100" y1="445.0" x2="940" y2="445.0" stroke="#d8d0c4" stroke-dasharray="5 5"/>
+<text x="84.0" y="450.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">100</text>
+<line x1="100" y1="420.0" x2="940" y2="420.0" stroke="#ebe5db"/>
+<text x="84.0" y="425.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">110</text>
+<line x1="100" y1="395.0" x2="940" y2="395.0" stroke="#ebe5db"/>
+<text x="84.0" y="400.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">120</text>
+<line x1="100" y1="370.0" x2="940" y2="370.0" stroke="#ebe5db"/>
+<text x="84.0" y="375.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">130</text>
+<line x1="100" y1="345.0" x2="940" y2="345.0" stroke="#ebe5db"/>
+<text x="84.0" y="350.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">140</text>
+<line x1="100" y1="320.0" x2="940" y2="320.0" stroke="#ebe5db"/>
+<text x="84.0" y="325.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">150</text>
+<line x1="100" y1="295.0" x2="940" y2="295.0" stroke="#ebe5db"/>
+<text x="84.0" y="300.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">160</text>
+<line x1="100" y1="270.0" x2="940" y2="270.0" stroke="#ebe5db"/>
+<text x="84.0" y="275.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">170</text>
+<line x1="100" y1="245.0" x2="940" y2="245.0" stroke="#ebe5db"/>
+<text x="84.0" y="250.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">180</text>
+<line x1="100" y1="220.0" x2="940" y2="220.0" stroke="#ebe5db"/>
+<text x="84.0" y="225.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">190</text>
+<line x1="100" y1="195.0" x2="940" y2="195.0" stroke="#ebe5db"/>
+<text x="84.0" y="200.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">200</text>
+<line x1="100" y1="170.0" x2="940" y2="170.0" stroke="#ebe5db"/>
+<text x="84.0" y="175.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">210</text>
+<line x1="100" y1="145.0" x2="940" y2="145.0" stroke="#ebe5db"/>
+<text x="84.0" y="150.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">220</text>
+<line x1="100" y1="120.0" x2="940" y2="120.0" stroke="#ebe5db"/>
+<text x="84.0" y="125.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="end" font-family="Georgia, Times New Roman, serif">230</text>
+<line x1="100.0" y1="120" x2="100.0" y2="670" stroke="#f0ebe2"/>
+<text x="100.0" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2019</text>
+<line x1="218.6" y1="120" x2="218.6" y2="670" stroke="#f0ebe2"/>
+<text x="218.6" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2020</text>
+<line x1="337.2" y1="120" x2="337.2" y2="670" stroke="#f0ebe2"/>
+<text x="337.2" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2021</text>
+<line x1="455.8" y1="120" x2="455.8" y2="670" stroke="#f0ebe2"/>
+<text x="455.8" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2022</text>
+<line x1="574.4" y1="120" x2="574.4" y2="670" stroke="#f0ebe2"/>
+<text x="574.4" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2023</text>
+<line x1="692.9" y1="120" x2="692.9" y2="670" stroke="#f0ebe2"/>
+<text x="692.9" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2024</text>
+<line x1="811.5" y1="120" x2="811.5" y2="670" stroke="#f0ebe2"/>
+<text x="811.5" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2025</text>
+<line x1="930.1" y1="120" x2="930.1" y2="670" stroke="#f0ebe2"/>
+<text x="930.1" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">2026</text>
+<line x1="940.0" y1="120" x2="940.0" y2="670" stroke="#f0ebe2"/>
+<text x="940.0" y="698.0" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle" font-family="Georgia, Times New Roman, serif">Feb 2026</text>
+<polyline fill="none" stroke="#0f766e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="100.0,474.7 109.9,488.9 119.8,471.6 129.6,464.1 139.5,445.0 149.4,462.0 159.3,446.2 169.2,448.2 179.1,461.3 188.9,437.5 198.8,408.3 208.7,332.3 218.6,451.8 228.5,461.2 238.4,419.7 248.2,374.5 258.1,347.4 268.0,360.4 277.9,352.6 287.8,355.9 297.6,367.2 307.5,345.3 317.4,289.3 327.3,236.6 337.2,360.4 347.1,385.7 356.9,322.5 366.8,328.4 376.7,340.8 386.6,336.1 396.5,356.1 406.4,338.2 416.2,357.0 426.1,334.5 436.0,264.1 445.9,239.1 455.8,342.5 465.6,366.7 475.5,326.5 485.4,334.8 495.3,324.8 505.2,344.4 515.1,339.2 524.9,325.9 534.8,346.0 544.7,331.7 554.6,274.7 564.5,239.6 574.4,330.6 584.2,356.7 594.1,313.6 604.0,326.1 613.9,294.6 623.8,315.8 633.6,303.9 643.5,300.6 653.4,326.3 663.3,291.2 673.2,233.1 683.1,200.5 692.9,309.5 702.8,329.3 712.7,302.3 722.6,295.4 732.5,278.3 742.4,300.5 752.2,272.5 762.1,289.7 772.0,300.8 781.9,257.8 791.8,217.5 801.6,149.4 811.5,295.5 821.4,319.6 831.3,281.5 841.2,275.9 851.1,263.3 860.9,280.0 870.8,250.6 880.7,272.7 890.6,276.6 900.5,241.0 910.4,207.0 920.2,127.0 930.1,274.7 940.0,297.1"/>
+<circle cx="940.0" cy="297.1" r="5" fill="#0f766e"/>
+<text x="950.0" y="302.1" font-size="14" font-weight="600" fill="#0f766e" text-anchor="start" font-family="Georgia, Times New Roman, serif">E-commerce</text>
+<polyline fill="none" stroke="#d97706" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="100.0,470.0 109.9,471.9 119.8,436.3 129.6,448.5 139.5,430.8 149.4,434.2 159.3,432.3 169.2,429.2 179.1,452.9 188.9,445.0 198.8,451.7 208.7,437.2 218.6,453.4 228.5,449.1 238.4,504.6 248.2,569.2 258.1,512.9 268.0,473.6 277.9,461.6 287.8,456.4 297.6,466.4 307.5,456.1 317.4,483.3 327.3,480.8 337.2,477.0 347.1,489.8 356.9,431.9 366.8,426.3 376.7,407.3 386.6,410.3 396.5,396.2 406.4,410.7 416.2,428.7 426.1,418.2 436.0,437.1 445.9,420.4 455.8,450.7 465.6,445.6 475.5,408.3 485.4,404.3 495.3,394.3 505.2,405.3 515.1,396.4 524.9,399.6 534.8,414.7 544.7,406.4 554.6,427.4 564.5,402.7 574.4,416.4 584.2,425.3 594.1,387.7 604.0,397.8 613.9,381.8 623.8,384.3 633.6,379.1 643.5,387.3 653.4,399.3 663.3,395.6 673.2,408.7 683.1,378.6 692.9,416.5 702.8,404.2 712.7,376.5 722.6,389.5 732.5,369.3 742.4,377.6 752.2,377.0 762.1,371.9 772.0,397.1 781.9,385.6 791.8,394.4 801.6,383.2 811.5,407.3 821.4,413.6 831.3,363.5 841.2,377.9 851.1,351.8 860.9,366.9 870.8,364.7 880.7,358.9 890.6,388.0 900.5,377.5 910.4,389.2 920.2,377.3 930.1,401.3 940.0,405.6"/>
+<circle cx="940.0" cy="405.6" r="5" fill="#d97706"/>
+<text x="950.0" y="410.6" font-size="14" font-weight="600" fill="#d97706" text-anchor="start" font-family="Georgia, Times New Roman, serif">Restaurants</text>
+<polyline fill="none" stroke="#15803d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="100.0,442.0 109.9,469.6 119.8,444.7 129.6,451.5 139.5,436.0 149.4,444.4 159.3,438.2 169.2,436.3 179.1,453.9 188.9,446.1 198.8,441.7 208.7,435.5 218.6,446.1 228.5,459.4 238.4,379.0 248.2,418.5 258.1,402.3 268.0,424.2 277.9,413.6 287.8,425.1 297.6,436.3 307.5,427.7 317.4,427.8 327.3,415.7 337.2,425.3 347.1,449.9 356.9,428.2 366.8,434.2 376.7,417.9 386.6,426.5 396.5,418.7 406.4,421.1 416.2,428.2 426.1,420.5 436.0,425.4 445.9,408.9 455.8,425.0 465.6,450.3 475.5,429.1 485.4,430.5 495.3,421.0 505.2,427.5 515.1,421.0 524.9,425.3 534.8,432.1 544.7,424.5 554.6,422.4 564.5,406.9 574.4,431.2 584.2,449.8 594.1,428.4 604.0,434.3 613.9,423.3 623.8,432.1 633.6,426.0 643.5,427.2 653.4,436.1 663.3,433.1 673.2,428.1 683.1,415.8 692.9,435.0 702.8,449.1 712.7,430.2 722.6,445.9 732.5,424.7 742.4,434.3 752.2,426.1 762.1,426.4 772.0,438.4 781.9,427.9 791.8,425.8 801.6,418.4 811.5,427.6 821.4,452.2 831.3,431.7 841.2,434.5 851.1,421.1 860.9,435.0 870.8,424.3 880.7,424.9 890.6,439.2 900.5,427.5 910.4,428.9 920.2,419.4 930.1,429.1 940.0,459.0"/>
+<circle cx="940.0" cy="459.0" r="5" fill="#15803d"/>
+<text x="950.0" y="464.0" font-size="14" font-weight="600" fill="#15803d" text-anchor="start" font-family="Georgia, Times New Roman, serif">Grocery</text>
+<polyline fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="100.0,474.5 109.9,480.8 119.8,447.3 129.6,455.4 139.5,439.3 149.4,446.9 159.3,448.3 169.2,435.4 179.1,466.2 188.9,449.5 198.8,421.0 208.7,375.4 218.6,473.1 228.5,469.1 238.4,443.8 248.2,467.0 258.1,427.9 268.0,443.1 277.9,441.7 287.8,441.2 297.6,457.8 307.5,439.9 317.4,430.0 327.3,387.0 337.2,454.7 347.1,478.3 356.9,432.7 366.8,435.0 376.7,419.2 386.6,436.9 396.5,431.8 406.4,429.3 416.2,449.4 426.1,427.7 436.0,419.6 445.9,373.2 455.8,461.0 465.6,469.4 475.5,444.8 485.4,433.4 495.3,423.5 505.2,432.4 515.1,431.5 524.9,428.3 534.8,443.6 544.7,428.9 554.6,417.9 564.5,369.0 574.4,458.5 584.2,466.5 594.1,448.3 604.0,440.2 613.9,431.0 623.8,436.4 633.6,435.7 643.5,430.7 653.4,447.4 663.3,437.7 673.2,424.3 683.1,373.4 692.9,465.9 702.8,462.9 712.7,435.6 722.6,453.2 732.5,429.6 742.4,438.0 752.2,439.4 762.1,428.0 772.0,451.6 781.9,436.4 791.8,420.6 801.6,381.1 811.5,460.4 821.4,470.3 831.3,442.8 841.2,447.0 851.1,427.5 860.9,442.1 870.8,440.0 880.7,429.5 890.6,456.3 900.5,436.4 910.4,424.2 920.2,386.6 930.1,458.3 940.0,473.3"/>
+<circle cx="940.0" cy="473.3" r="5" fill="#2563eb"/>
+<text x="950.0" y="478.3" font-size="14" font-weight="600" fill="#2563eb" text-anchor="start" font-family="Georgia, Times New Roman, serif">General Merchandise</text>
+<polyline fill="none" stroke="#9333ea" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="100.0,509.5 109.9,501.4 119.8,445.1 129.6,452.4 139.5,436.4 149.4,453.4 159.3,450.4 169.2,434.7 179.1,475.3 188.9,449.9 198.8,406.6 208.7,324.9 218.6,509.3 228.5,492.3 238.4,579.5 248.2,668.4 258.1,611.9 268.0,527.5 277.9,512.0 287.8,501.7 297.6,502.1 307.5,484.3 317.4,471.8 327.3,398.8 337.2,538.2 347.1,538.3 356.9,454.6 366.8,458.8 376.7,438.1 386.6,446.1 396.5,438.9 406.4,449.3 416.2,471.0 426.1,454.0 436.0,412.9 445.9,353.8 455.8,525.5 465.6,515.4 475.5,458.8 485.4,457.3 495.3,452.2 505.2,470.0 515.1,467.2 524.9,464.4 534.8,481.7 544.7,467.4 554.6,431.9 564.5,357.6 574.4,520.7 584.2,512.3 594.1,470.0 604.0,471.1 613.9,461.7 623.8,473.7 633.6,466.7 643.5,457.7 653.4,482.5 663.3,475.3 673.2,433.4 683.1,356.6 692.9,526.1 702.8,507.4 712.7,471.8 722.6,481.2 732.5,453.2 742.4,471.2 752.2,470.0 762.1,457.6 772.0,492.0 781.9,471.0 791.8,426.1 801.6,359.6 811.5,517.1 821.4,512.5 831.3,464.5 841.2,467.2 851.1,440.8 860.9,464.8 870.8,452.2 880.7,444.4 890.6,477.6 900.5,455.8 910.4,408.8 920.2,341.9 930.1,511.8 940.0,501.0"/>
+<circle cx="940.0" cy="501.0" r="5" fill="#9333ea"/>
+<text x="950.0" y="506.0" font-size="14" font-weight="600" fill="#9333ea" text-anchor="start" font-family="Georgia, Times New Roman, serif">Clothing</text>
+<polyline fill="none" stroke="#dc2626" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="100.0,472.6 109.9,477.8 119.8,443.8 129.6,455.8 139.5,437.7 149.4,451.4 159.3,441.2 169.2,430.9 179.1,443.7 188.9,441.5 198.8,423.1 208.7,420.4 218.6,463.6 228.5,464.5 238.4,496.1 248.2,599.0 258.1,515.3 268.0,452.7 277.9,439.1 287.8,427.0 297.6,428.2 307.5,429.2 317.4,428.5 327.3,409.9 337.2,442.2 347.1,456.0 356.9,397.3 366.8,412.4 376.7,414.5 386.6,422.4 396.5,416.3 406.4,415.4 416.2,419.3 426.1,419.9 436.0,405.0 445.9,409.4 455.8,462.5 465.6,456.9 475.5,415.7 485.4,425.4 495.3,427.7 505.2,438.2 515.1,441.5 524.9,424.2 534.8,435.0 544.7,438.3 554.6,425.9 564.5,429.0 574.4,454.4 584.2,464.8 594.1,434.5 604.0,461.7 613.9,447.7 623.8,452.6 633.6,460.9 643.5,446.0 653.4,460.4 663.3,468.8 673.2,442.8 683.1,453.1 692.9,490.5 702.8,483.0 712.7,470.2 722.6,479.3 732.5,462.8 742.4,475.0 752.2,464.0 762.1,453.3 772.0,467.0 781.9,464.5 791.8,441.5 801.6,440.1 811.5,482.8 821.4,482.6 831.3,460.2 841.2,467.3 851.1,456.5 860.9,471.5 870.8,456.8 880.7,462.1 890.6,476.7 900.5,470.2 910.4,457.9 920.2,460.5 930.1,495.8 940.0,496.8"/>
+<circle cx="940.0" cy="496.8" r="5" fill="#dc2626"/>
+<text x="950.0" y="501.8" font-size="14" font-weight="600" fill="#dc2626" text-anchor="start" font-family="Georgia, Times New Roman, serif">Furniture</text>
+<text x="950.0" y="96.0" font-size="15" font-weight="700" fill="#111827" text-anchor="start" font-family="Georgia, Times New Roman, serif">Real sales index</text>
+<text x="950.0" y="120.0" font-size="13" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Georgia, Times New Roman, serif">2019 average = 100</text>
+</svg>

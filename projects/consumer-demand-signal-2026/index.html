@@ -1,0 +1,96 @@
+
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Consumer Demand Signal: Where Spending Is Holding Up in 2026 | Roshni Bhandula</title>
+            <meta name="description" content="A consumer analytics case study that combines retail sales, consumer sentiment, and income-segment card-spend data to show where demand is resilient and where discretionary pressure is still visible.">
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body class="site-body">
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+            <header class="site-header"><div class="brand"><a href="/">RB</a></div><nav class="site-nav"><a class="nav-link" href="/">Home</a><a class="nav-link active" href="/projects">Projects</a><a class="nav-link" href="/articles">Insights</a><a class="nav-link" href="/#about">About</a><a class="nav-link" href="/#contact">Contact</a></nav></header>
+            <main class="page-main">
+        <section class="detail-hero">
+            <div class="breadcrumb"><a href="/">Home</a> / <a href="/projects">Projects</a></div>
+            <div class="detail-hero__grid">
+                <div class="detail-hero__copy">
+                    <div class="eyebrow">Project</div>
+                    <h1>Consumer Demand Signal: Where Spending Is Holding Up in 2026</h1>
+                    <p class="hero-lead">A consumer analytics case study that combines retail sales, consumer sentiment, and income-segment card-spend data to show where demand is resilient and where discretionary pressure is still visible.</p>
+                    <div class="story-meta">April 28, 2026 • 6 min read</div>
+                    <div class="tag-row"><span class="tag">consumer analytics</span><span class="tag">customer insights</span><span class="tag">retail analytics</span><span class="tag">segmentation</span><span class="tag">public data</span></div>
+                </div>
+                <div class="detail-cover">
+                    <div class="cover-media"><img src="/uploads/consumer-demand-signal-cover.svg" alt="Consumer Demand Signal: Where Spending Is Holding Up in 2026" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+        <section class="detail-layout">
+            <article class="article-body">
+                <h2>Context</h2>
+<p>Weak consumer confidence does not automatically translate into weak demand. The real challenge for consumer teams is knowing <strong>which categories are still structurally resilient</strong> and <strong>which pockets of demand look strong only because the benchmark is misleading</strong>.</p>
+<h2>Question</h2>
+<p>Where is U.S. consumer demand still holding up in 2026, and how does the answer change when I look at both category-level sales and income-segment spending behavior?</p>
+<h2>Data Sources</h2>
+<ul><li><a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/data/Affinity%20-%20National%20-%20Monthly.csv" target="_blank" rel="noreferrer">Opportunity Insights Economic Tracker monthly consumer spending data</a></li><li><a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/docs/oi_tracker_data_documentation.md" target="_blank" rel="noreferrer">Opportunity Insights data documentation</a></li><li><a href="https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/data/Affinity%20Income%20Shares%20-%20National%20-%202020.csv" target="_blank" rel="noreferrer">Opportunity Insights Jan 2020 income shares</a></li><li><a href="https://fred.stlouisfed.org/series/UMCSENT" target="_blank" rel="noreferrer">FRED: University of Michigan Consumer Sentiment</a></li><li><a href="https://fred.stlouisfed.org/series/CPIAUCSL" target="_blank" rel="noreferrer">FRED: Consumer Price Index</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM4541USN" target="_blank" rel="noreferrer">FRED: E-commerce retail sales</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM7225USN" target="_blank" rel="noreferrer">FRED: Food services and drinking places</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM4481USN" target="_blank" rel="noreferrer">FRED: Clothing stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM442USN" target="_blank" rel="noreferrer">FRED: Furniture stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM44511USN" target="_blank" rel="noreferrer">FRED: Grocery stores</a></li><li><a href="https://fred.stlouisfed.org/series/MRTSSM452USN" target="_blank" rel="noreferrer">FRED: General merchandise stores</a></li></ul>
+<h2>What I Built</h2>
+<ul><li>A refreshed data pull that combines public consumer card-spend, retail-sales, inflation, and sentiment series</li><li>A real-sales index for six retail categories, normalized to a 2019 baseline</li><li>An income-segment view of spending change by category using Opportunity Insights' monthly Affinity cut</li><li>A simple share model to separate <strong>relative growth</strong> from <strong>absolute dollar concentration</strong></li></ul>
+<figure class="article-figure"><img src="/uploads/retail-real-index.svg" alt="Real retail demand by category" loading="lazy"><figcaption>Real retail demand by category</figcaption></figure>
+<figure class="article-figure"><img src="/uploads/income-heatmap-latest.svg" alt="Latest income-segment spend snapshot" loading="lazy"><figcaption>Latest income-segment spend snapshot</figcaption></figure>
+<h2>Key Findings</h2>
+<ul><li><strong>E-commerce remained the strongest structural winner.</strong> In February 2026, real e-commerce sales were +59.2% versus the 2019 average and gained +9.73 percentage points of share inside the tracked retail basket.</li><li><strong>Experiences stayed healthier than big-ticket goods.</strong> Restaurants were still +15.8% above the 2019 baseline, while furniture was -20.7% below it.</li><li><strong>Low-income ZIP codes showed stronger relative growth than high-income ZIP codes.</strong> In Opportunity Insights' March 2026 monthly release, total spending was up 48.3% for Q1 ZIP codes versus 28.6% for Q4 ZIP codes relative to the January 2020 baseline.</li><li><strong>High-income households still mattered most in dollar terms.</strong> Q4 ZIP codes represented 37.0% of baseline card spend and an estimated 34.8% in the latest month even after the slower relative growth.</li><li><strong>General merchandise had the widest persistent income gap.</strong> Since 2024, low-income ZIP codes have consistently outpaced high-income ZIP codes the most in general merchandise, which is a useful signal for value positioning and mass-channel planning.</li></ul>
+<h2>Why It Matters</h2>
+<p>This is the kind of work I want to keep doing: connecting external demand signals to concrete business questions around category risk, customer mix, channel strategy, and message prioritization. The project is especially relevant to consumer analytics, customer insights, business intelligence, and commercial strategy roles because it shows how I move from public data to decisions, not just charts.</p>
+<figure class="article-figure"><img src="/uploads/income-share-slope.svg" alt="Estimated income share shift" loading="lazy"><figcaption>Estimated income share shift</figcaption></figure>
+<h2>Output Assets</h2>
+<ul><li><code>analysis/consumer-demand-signal/artifacts/retail-real-index.svg</code></li><li><code>analysis/consumer-demand-signal/artifacts/income-heatmap-latest.svg</code></li><li><code>analysis/consumer-demand-signal/artifacts/income-share-slope.svg</code></li><li><code>analysis/consumer-demand-signal/data/processed/consumer_demand_summary.json</code></li></ul>
+            </article>
+            <aside class="detail-sidecard">
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Why This Matters</div>
+                    <p>This project reflects the kind of role I am targeting: work that requires clear problem framing, analytical depth, and communication that helps teams act.</p>
+                    <div class="tag-row"><span class="tag">consumer analytics</span><span class="tag">customer insights</span><span class="tag">retail analytics</span><span class="tag">segmentation</span><span class="tag">public data</span></div>
+                </div>
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Continue Exploring</div>
+                    <a class="inline-link" href="/articles">Read related insights</a>
+                    <a class="inline-link" href="https://www.linkedin.com/in/roshni-bhandula" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+                </div>
+            </aside>
+        </section>
+</main>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+const params = new URLSearchParams(window.location.search);
+const editorSelector = params.has('edit_entry') ? '#story-editor' : params.has('edit_hobby') ? '#hobby-editor' : '';
+if (editorSelector) {
+  const editor = document.querySelector(editorSelector);
+  const firstField = editor?.querySelector('input[name="title"], textarea[name="description"], textarea[name="body_markdown"]');
+  if (editor) {
+    requestAnimationFrame(() => {
+      editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (firstField) {
+        firstField.focus({ preventScroll: true });
+        if (typeof firstField.select === 'function') {
+          firstField.select();
+        }
+      }
+    });
+  }
+}
+</script>
+
+        </body>
+        </html>

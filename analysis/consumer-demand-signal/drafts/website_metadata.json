@@ -1,0 +1,38 @@
+{
+  "project": {
+    "title": "Consumer Demand Signal: Where Spending Is Holding Up in 2026",
+    "slug": "consumer-demand-signal-2026",
+    "summary": "A consumer analytics case study that combines retail sales, consumer sentiment, and income-segment card-spend data to show where demand is resilient and where discretionary pressure is still visible.",
+    "published_on": "2026-04-28",
+    "read_time": "6 min read",
+    "tags": [
+      "consumer analytics",
+      "customer insights",
+      "retail analytics",
+      "segmentation",
+      "public data"
+    ],
+    "accent": "sunrise",
+    "suggested_cover_asset": "consumer-demand-signal-cover.svg",
+    "published": true,
+    "featured": true
+  },
+  "article": {
+    "title": "Consumer Spending Is Not One Story",
+    "slug": "consumer-spending-is-not-one-story",
+    "summary": "A detailed walkthrough of how I used Opportunity Insights and FRED data to analyze category resilience, income-based spending differences, and what those signals mean for consumer strategy.",
+    "published_on": "2026-04-28",
+    "read_time": "14 min read",
+    "tags": [
+      "consumer insights",
+      "spending trends",
+      "income segmentation",
+      "retail strategy",
+      "analytics"
+    ],
+    "accent": "sunrise",
+    "suggested_cover_asset": "consumer-demand-signal-cover.svg",
+    "published": true,
+    "featured": true
+  }
+}
