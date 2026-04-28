@@ -412,124 +412,102 @@ def build_cover(path: Path, title: str, subtitle: str, key_stats: list[str]) -> 
     height = 900
     stat_pairs = [item.split(":", 1) for item in key_stats]
     normalized_stats = [(label.strip(), value.strip()) for label, value in stat_pairs if len([label, value]) == 2]
+    
+    def parse_percent(text: str) -> float:
+        chunk = text.split("%", 1)[0].replace("est.", "").strip()
+        try:
+            return float(chunk)
+        except ValueError:
+            return 0.0
+
+    chart_stats = [(label, value, parse_percent(value)) for label, value in normalized_stats[:3]]
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{html.escape(title)}">',
         """
         <defs>
           <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#fbf6ea"/>
-            <stop offset="55%" stop-color="#f6efe2"/>
-            <stop offset="100%" stop-color="#edf8f5"/>
+            <stop offset="0%" stop-color="#fff8ec"/>
+            <stop offset="58%" stop-color="#f5eee0"/>
+            <stop offset="100%" stop-color="#edf7f5"/>
           </linearGradient>
-          <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#fffdfa"/>
-            <stop offset="100%" stop-color="#f8fafc"/>
-          </linearGradient>
-          <linearGradient id="inkpanel" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#172033"/>
+          <linearGradient id="navy" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#18253b"/>
             <stop offset="100%" stop-color="#0f172a"/>
           </linearGradient>
+          <linearGradient id="chartpanel" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#f9fbfd"/>
+            <stop offset="100%" stop-color="#eef6f5"/>
+          </linearGradient>
           <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#1f2937" flood-opacity="0.12"/>
+            <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#1f2937" flood-opacity="0.14"/>
           </filter>
         </defs>
         """.strip(),
         '<rect width="100%" height="100%" fill="url(#bg)"/>',
-        '<circle cx="1350" cy="150" r="260" fill="#f7d774" opacity="0.20"/>',
-        '<circle cx="112" cy="824" r="240" fill="#8fd0df" opacity="0.18"/>',
-        '<path d="M1140 0 L1600 0 L1600 390 Q1450 360 1345 295 Q1228 220 1140 0 Z" fill="#f0dcb8" opacity="0.48"/>',
-        '<rect x="70" y="66" width="1460" height="768" rx="40" fill="url(#panel)" stroke="#eadcc7" filter="url(#shadow)"/>',
-        '<rect x="110" y="116" width="660" height="668" rx="34" fill="url(#inkpanel)"/>',
-        '<rect x="842" y="132" width="626" height="310" rx="30" fill="#f8fbfd" stroke="#d9e6eb"/>',
-        '<rect x="842" y="472" width="300" height="276" rx="28" fill="#fff8ee" stroke="#eedcbb"/>',
-        '<rect x="1166" y="472" width="302" height="276" rx="28" fill="#f6fbfa" stroke="#cfe7e1"/>',
-        '<rect x="690" y="438" width="182" height="118" rx="24" fill="#fff7df" stroke="#eccc7d" filter="url(#shadow)"/>',
-        svg_text(160, 174, "Consumer Analytics Project", size=22, weight=700, fill="#80d9cf"),
-        svg_text(160, 256, title, size=64, weight=700, fill="#f8fbff"),
-        svg_text(160, 312, "Where spending is holding up by category", size=28, weight=600, fill="#c9d4e6"),
-        svg_text(160, 350, "and income segment", size=28, weight=600, fill="#c9d4e6"),
-        svg_text(160, 410, subtitle, size=22, fill="#d5dfec"),
+        '<circle cx="1330" cy="120" r="250" fill="#f6d980" opacity="0.22"/>',
+        '<circle cx="1480" cy="720" r="260" fill="#93d5d5" opacity="0.14"/>',
+        '<rect x="68" y="72" width="1464" height="756" rx="40" fill="#fffdfa" stroke="#eadfcd" filter="url(#shadow)"/>',
+        '<rect x="108" y="112" width="632" height="676" rx="34" fill="url(#navy)"/>',
+        '<rect x="778" y="112" width="714" height="356" rx="34" fill="url(#chartpanel)" stroke="#d9e8e5"/>',
+        '<rect x="778" y="500" width="714" height="288" rx="34" fill="#fffaf0" stroke="#eddcbc"/>',
+        svg_text(154, 172, "Consumer Analytics Project", size=22, weight=700, fill="#85ddd0"),
+        svg_text(154, 270, "Consumer", size=84, weight=700, fill="#f8fbff"),
+        svg_text(154, 356, "Demand", size=84, weight=700, fill="#f8fbff"),
+        svg_text(154, 442, "Signal", size=84, weight=700, fill="#f8fbff"),
+        svg_text(156, 512, "Where spending is holding up in 2026", size=28, weight=600, fill="#ced9e9"),
+        svg_text(156, 550, "through category demand and income mix", size=24, weight=600, fill="#ced9e9"),
+        svg_text(156, 628, "A public-data consumer analytics story built from", size=20, fill="#dbe5ef"),
+        svg_text(156, 660, "retail sales, sentiment, and segmented spending data.", size=20, fill="#dbe5ef"),
+        svg_text(1180, 200, "2026", size=132, weight=700, fill="#dbe9e6", anchor="middle"),
+        svg_text(838, 258, "Category strength is split, not uniform.", size=28, weight=700, fill="#112031"),
     ]
 
-    stat_card_y = 502
-    stat_card_x = 160
-    stat_card_w = 260
-    stat_card_h = 112
-    stat_gap = 26
-    for index, (label, value) in enumerate(normalized_stats[:3]):
-        x = stat_card_x + index * (stat_card_w + stat_gap)
-        parts.append(f'<rect x="{x}" y="{stat_card_y}" width="{stat_card_w}" height="{stat_card_h}" rx="24" fill="#fff8e7" opacity="0.98" stroke="#f0d799"/>')
-        parts.append(svg_text(x + 24, stat_card_y + 42, label, size=17, weight=700, fill="#8a5a16"))
-        parts.append(svg_text(x + 24, stat_card_y + 82, value, size=24, weight=700, fill="#10223f"))
+    chart_origin_x = 1118
+    chart_track_x = 944
+    chart_top = 318
+    chart_row_gap = 74
+    chart_bar_max = 238
+    chart_colors = ["#0f766e", "#d97706", "#dc2626"]
+    chart_max_abs = max([abs(percent) for _, _, percent in chart_stats] + [1.0])
+    parts.append(svg_text(840, 296, "Real demand vs 2019 baseline", size=17, weight=600, fill="#5d6a78"))
+    parts.append(f'<line x1="{chart_origin_x}" y1="{chart_top - 22}" x2="{chart_origin_x}" y2="{chart_top + 2 * chart_row_gap + 26}" stroke="#cdd9de" stroke-width="3"/>')
+    parts.append(svg_text(chart_origin_x, chart_top - 34, "0%", size=13, weight=700, fill="#64748b", anchor="middle"))
+    for row_index, (label, value_text, percent) in enumerate(chart_stats):
+        y = chart_top + row_index * chart_row_gap
+        color = chart_colors[row_index % len(chart_colors)]
+        bar_width = abs(percent) / chart_max_abs * chart_bar_max
+        parts.append(f'<line x1="{chart_track_x}" y1="{y}" x2="{chart_track_x + 430}" y2="{y}" stroke="#e8eff2" stroke-width="16" stroke-linecap="round"/>')
+        if percent >= 0:
+            x = chart_origin_x
+        else:
+            x = chart_origin_x - bar_width
+        parts.append(f'<rect x="{x:.1f}" y="{y - 12:.1f}" width="{bar_width:.1f}" height="24" rx="12" fill="{color}"/>')
+        parts.append(svg_text(840, y + 7, label, size=19, weight=700, fill="#0f172a"))
+        pill_x = 1294
+        parts.append(f'<rect x="{pill_x}" y="{y - 24}" width="138" height="48" rx="18" fill="#fffdfa" stroke="{color}"/>')
+        parts.append(svg_text(pill_x + 69, y + 8, value_text.split(" vs", 1)[0], size=18, weight=700, fill="#0f172a", anchor="middle"))
 
-    parts.extend(
-        [
-            svg_text(160, 676, "Why this matters", size=18, weight=700, fill="#80d9cf"),
-            svg_text(160, 712, "This piece combines public spending, retail, and", size=20, fill="#d5dfec"),
-            svg_text(160, 742, "consumer sentiment signals into a decision-ready", size=20, fill="#d5dfec"),
-            svg_text(160, 772, "view of resilience, pressure, and customer mix.", size=20, fill="#d5dfec"),
-        ]
-    )
-
-    chart_left = 872
-    chart_top = 156
-    chart_points = {
-        "#0f766e": [(0, 208), (58, 178), (118, 170), (178, 136), (236, 144), (296, 112), (354, 104), (412, 76), (470, 60), (530, 48)],
-        "#d97706": [(0, 226), (58, 220), (118, 194), (178, 178), (236, 168), (296, 154), (354, 148), (412, 132), (470, 136), (530, 126)],
-        "#dc2626": [(0, 208), (58, 158), (118, 154), (178, 146), (236, 160), (296, 154), (354, 166), (412, 178), (470, 196), (530, 208)],
-        "#2563eb": [(0, 214), (58, 208), (118, 210), (178, 202), (236, 194), (296, 188), (354, 180), (412, 174), (470, 176), (530, 172)],
-    }
-    for tick_y in (226, 186, 146, 106, 66):
-        parts.append(f'<line x1="{chart_left + 20}" y1="{chart_top + tick_y}" x2="{chart_left + 560}" y2="{chart_top + tick_y}" stroke="#e9eef2"/>')
-    for tick_x, label in zip((0, 110, 220, 330, 440, 530), ("2019", "2020", "2021", "2022", "2024", "2026")):
-        x = chart_left + 22 + tick_x
-        parts.append(f'<line x1="{x}" y1="{chart_top + 36}" x2="{x}" y2="{chart_top + 258}" stroke="#f1f5f9"/>')
-        parts.append(svg_text(x, chart_top + 286, label, size=13, fill="#64748b", anchor="middle"))
-    parts.append(svg_text(876, 188, "Real Demand by Category", size=28, weight=700, fill="#0f172a"))
-    parts.append(svg_text(876, 218, "2019 real-sales baseline indexed to 100", size=16, fill="#5b6577"))
-    for color, points in chart_points.items():
-        shifted = " ".join(f"{chart_left + 22 + x},{chart_top + 42 + y}" for x, y in points)
-        parts.append(f'<polyline fill="none" stroke="{color}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="{shifted}"/>')
-    legend_items = [
-        ("E-commerce", "#0f766e"),
-        ("Restaurants", "#d97706"),
-        ("Furniture", "#dc2626"),
-        ("Grocery", "#2563eb"),
+    stats_x = 828
+    stats_y = 560
+    stat_w = 192
+    stat_h = 108
+    stat_gap = 18
+    simple_stats = [
+        normalized_stats[0],
+        normalized_stats[2] if len(normalized_stats) > 2 else ("Q1 all spend", ""),
+        normalized_stats[3] if len(normalized_stats) > 3 else ("Q4 share", ""),
     ]
-    for index, (label, color) in enumerate(legend_items):
-        lx = 878 + index * 142
-        ly = 406
-        parts.append(f'<rect x="{lx}" y="{ly}" width="18" height="18" rx="9" fill="{color}"/>')
-        parts.append(svg_text(lx + 28, ly + 14, label, size=14, weight=600, fill="#334155"))
-
-    heat_y = 540
-    cell_w = 64
-    cell_h = 48
-    sample_rows = [
-        ("All Spend", [48, 42, 37, 29]),
-        ("Grocery", [20, 18, 18, 19]),
-        ("Gen Merch", [110, 112, 97, 74]),
-    ]
-    parts.append(svg_text(876, 508, "Latest Income Snapshot", size=24, weight=700, fill="#0f172a"))
-    parts.append(svg_text(876, 534, "March 2026 vs Jan 2020 baseline", size=15, fill="#5b6577"))
-    for idx, quartile in enumerate(QUARTILE_LABELS):
-        parts.append(svg_text(1240 + idx * cell_w, heat_y - 18, quartile.upper(), size=13, weight=700, fill="#475569", anchor="middle"))
-    for row_index, (row_label, row_values) in enumerate(sample_rows):
-        y = heat_y + row_index * 64
-        parts.append(svg_text(878, y + 32, row_label, size=16, weight=600, fill="#1f2937"))
-        for col_index, row_value in enumerate(row_values):
-            fill = interpolate_color("#e8f5f2", "#0f766e", min(row_value / 115, 1))
-            x = 1208 + col_index * cell_w
-            text_fill = "#ffffff" if row_value > 55 else "#0f172a"
-            parts.append(f'<rect x="{x}" y="{y}" width="{cell_w - 10}" height="{cell_h}" rx="16" fill="{fill}" stroke="#d8ebe6"/>')
-            parts.append(svg_text(x + (cell_w - 10) / 2, y + 31, f"{row_value}%", size=16, weight=700, fill=text_fill, anchor="middle"))
-
-    parts.append(svg_text(874, 708, "Q1 low-income ZIP codes are gaining faster, but Q4 still carries the biggest spend share.", size=16, weight=600, fill="#0f766e"))
-    parts.append(svg_text(706, 486, "Signal", size=18, weight=700, fill="#925f10", anchor="middle"))
-    parts.append(svg_text(706, 520, "Category +", size=20, weight=700, fill="#0f172a", anchor="middle"))
-    parts.append(svg_text(706, 548, "income mix", size=20, weight=700, fill="#0f172a", anchor="middle"))
-
-    parts.append(svg_text(878, 760, "Public-data consumer analytics for portfolio storytelling, segmentation, and strategic interpretation.", size=16, fill="#64748b"))
+    parts.append(svg_text(828, 548, "Signal snapshot", size=26, weight=700, fill="#0f172a"))
+    for index, (label, value) in enumerate(simple_stats):
+        x = stats_x + index * (stat_w + stat_gap)
+        y = stats_y
+        parts.append(
+            f'<rect x="{x}" y="{y}" width="{stat_w}" height="{stat_h}" rx="22" '
+            f'fill="#fffdfa" stroke="#e6d9c7"/>'
+        )
+        parts.append(svg_text(x + 20, y + 34, label, size=17, weight=700, fill="#82601d"))
+        parts.append(svg_text(x + 20, y + 72, value, size=25, weight=700, fill="#0f172a"))
+    parts.append(svg_text(828, 716, "Category resilience, low-income momentum, and high-income spend concentration.", size=16, fill="#64748b"))
 
     parts.append("</svg>")
     path.write_text("\n".join(parts), encoding="utf-8")
