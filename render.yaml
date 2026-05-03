@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: company-intelligence-assistant
+    env: python
+    plan: free
+    rootDir: company-intelligence-app
+    buildCommand: "python3 -m pip install -r requirements.txt"
+    startCommand: "HOST=0.0.0.0 python3 company_research_server.py"
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
