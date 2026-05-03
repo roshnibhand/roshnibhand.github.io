@@ -1,0 +1,89 @@
+
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Company Intelligence Assistant | Roshni Bhandula</title>
+            <meta name="description" content="A Gemini-powered research tool that turns any company name into an AI-generated intelligence snapshot covering business model, customers, competitors, financial signals, operations, leadership, culture, and strategic strengths or weaknesses.">
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body class="site-body">
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+            <header class="site-header"><div class="brand"><a href="/">RB</a></div><nav class="site-nav"><a class="nav-link" href="/">Home</a><a class="nav-link active" href="/projects">Projects</a><a class="nav-link" href="/articles">Insights</a><a class="nav-link" href="/#about">About</a><a class="nav-link" href="/#contact">Contact</a></nav></header>
+            <main class="page-main">
+        <section class="detail-hero">
+            <div class="breadcrumb"><a href="/">Home</a> / <a href="/projects">Projects</a></div>
+            <div class="detail-hero__grid">
+                <div class="detail-hero__copy">
+                    <div class="eyebrow">Project</div>
+                    <h1>Company Intelligence Assistant</h1>
+                    <p class="hero-lead">A Gemini-powered research tool that turns any company name into an AI-generated intelligence snapshot covering business model, customers, competitors, financial signals, operations, leadership, culture, and strategic strengths or weaknesses.</p>
+                    <div class="story-meta">May 04, 2026 • 4 min read</div>
+                    <div class="tag-row"><span class="tag">AI tooling</span><span class="tag">Gemini</span><span class="tag">company research</span><span class="tag">business intelligence</span><span class="tag">web search</span><span class="tag">PPT automation</span></div>
+                </div>
+                <div class="detail-cover">
+                    <div class="cover-media"><img src="/uploads/project-cover-company-intelligence-assistant.svg" alt="Company Intelligence Assistant" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+        <section class="detail-layout">
+            <article class="article-body">
+                <h1>Context</h1>
+<p>I wanted a practical way to understand companies quickly without opening a dozen tabs or losing the thread of what matters. The goal was not just to summarize a company, but to structure the research into the questions someone actually asks before engaging with an organization.</p>
+<h1>What I built</h1>
+<ul><li>A local Python web app that accepts any company name and uses Gemini with Google Search grounding for current web research</li><li>A structured Company Intelligence Snapshot that answers core business, revenue model, customers, competitors, financial health, operations, culture, leadership, and final strengths/weaknesses perspective</li><li>A loading layer with rotating status messages so long-running AI research feels active instead of stuck</li><li>A PowerPoint export path that turns the research into an editable deck</li><li>Guardrails that label the output as AI-generated and remind users to verify important facts before relying on the results</li></ul>
+<h1>Why it matters</h1>
+<p>Company research usually gets scattered across search results, company pages, news articles, LinkedIn, and funding or financial sources. This tool turns that mess into a repeatable research workflow and a presentation-ready output.</p>
+<h1>Live project note</h1>
+<p>This project is now part of my live portfolio. The AI backend uses a private Gemini API key, so the public website page showcases the project while the working prototype runs in a secure local environment unless deployed later to a backend-friendly host such as Render, Railway, Fly.io, or Cloud Run.</p>
+<h1>What this demonstrates</h1>
+<ul><li>Building an AI-assisted workflow around a real research job-to-be-done</li><li>Designing prompts that produce structured business intelligence, not generic summaries</li><li>Combining web-grounded AI with user-facing outputs like PPT decks</li><li>Thinking through privacy and deployment tradeoffs when API keys are involved</li><li>Translating a tool into a portfolio-ready product story</li></ul>
+            </article>
+            <aside class="detail-sidecard">
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Why This Matters</div>
+                    <p>This project reflects the kind of role I am targeting: work that requires clear problem framing, analytical depth, and communication that helps teams act.</p>
+                    <div class="tag-row"><span class="tag">AI tooling</span><span class="tag">Gemini</span><span class="tag">company research</span><span class="tag">business intelligence</span><span class="tag">web search</span><span class="tag">PPT automation</span></div>
+                </div>
+                <div class="detail-sidecard__group">
+                    <div class="eyebrow">Continue Exploring</div>
+                    <a class="inline-link" href="/articles">Read related insights</a>
+                    <a class="inline-link" href="https://www.linkedin.com/in/roshni-bhandula" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+                </div>
+            </aside>
+        </section>
+</main>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+const params = new URLSearchParams(window.location.search);
+const editorSelector = params.has('edit_entry') ? '#story-editor' : params.has('edit_hobby') ? '#hobby-editor' : '';
+if (editorSelector) {
+  const editor = document.querySelector(editorSelector);
+  const firstField = editor?.querySelector('input[name="title"], textarea[name="description"], textarea[name="body_markdown"]');
+  if (editor) {
+    requestAnimationFrame(() => {
+      editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (firstField) {
+        firstField.focus({ preventScroll: true });
+        if (typeof firstField.select === 'function') {
+          firstField.select();
+        }
+      }
+    });
+  }
+}
+</script>
+
+        </body>
+        </html>

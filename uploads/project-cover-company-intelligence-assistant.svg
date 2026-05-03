@@ -1,0 +1,22 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="34" fill="#172026"/>
+  <rect x="58" y="58" width="1084" height="644" rx="28" fill="#F7F8F3"/>
+  <rect x="108" y="116" width="984" height="88" rx="16" fill="#172026"/>
+  <text x="142" y="170" fill="#FFFFFF" font-family="Georgia, Times New Roman, serif" font-size="34" font-weight="700">Company Intelligence Assistant</text>
+  <rect x="108" y="248" width="302" height="324" rx="18" fill="#FFFFFF" stroke="#D7DDD2" stroke-width="2"/>
+  <rect x="449" y="248" width="302" height="324" rx="18" fill="#FFFFFF" stroke="#D7DDD2" stroke-width="2"/>
+  <rect x="790" y="248" width="302" height="324" rx="18" fill="#FFFFFF" stroke="#D7DDD2" stroke-width="2"/>
+  <text x="138" y="302" fill="#A43F2B" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">WEB-GROUNDED</text>
+  <text x="138" y="352" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="40" font-weight="700">Search</text>
+  <text x="138" y="400" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="23">Gemini gathers current public signals across company pages, news, and web results.</text>
+  <text x="479" y="302" fill="#A43F2B" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">STRUCTURED</text>
+  <text x="479" y="352" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="40" font-weight="700">Snapshot</text>
+  <text x="479" y="400" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="23">Business model, customers, competition, finances, leadership, culture, and trajectory.</text>
+  <text x="820" y="302" fill="#A43F2B" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">OUTPUT</text>
+  <text x="820" y="352" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="40" font-weight="700">PPT deck</text>
+  <text x="820" y="400" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="23">Turns research into a downloadable, editable Company Intelligence Snapshot.</text>
+  <path d="M242 612C338 640 464 640 559 611C656 582 772 582 958 620" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="242" cy="612" r="18" fill="#0F766E"/>
+  <circle cx="559" cy="611" r="18" fill="#0F766E"/>
+  <circle cx="958" cy="620" r="18" fill="#0F766E"/>
+</svg>
