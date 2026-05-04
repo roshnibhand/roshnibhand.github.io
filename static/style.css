@@ -319,9 +319,13 @@ li {
 }
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, #162235, #32455f);
   color: #f9f7f2;
   box-shadow: 0 14px 28px rgba(22, 34, 53, 0.18);
+  text-decoration: none;
 }
 
 .button:hover,
@@ -501,6 +505,39 @@ li {
 .story-card__content,
 .media-card__content {
   padding: 22px;
+}
+
+.story-card__actions {
+  padding: 0 22px 22px;
+}
+
+.story-card__actions .button {
+  width: 100%;
+}
+
+.live-project-tile {
+  width: min(1180px, calc(100vw - 36px));
+  margin: 18px auto 0;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-radius: 24px;
+  background: #fffdf8;
+  border: 1px solid rgba(23, 34, 53, 0.1);
+  box-shadow: var(--shadow);
+}
+
+.live-project-tile h2 {
+  margin: 6px 0 8px;
+  font-size: clamp(1.55rem, 2vw, 2rem);
+}
+
+.live-project-tile p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .hobby-card__content a {
@@ -1052,6 +1089,7 @@ select:focus {
   .hero-aside,
   .content-section--split,
   .detail-layout,
+  .live-project-tile,
   .admin-section--split,
   .cta-panel,
   .admin-header,

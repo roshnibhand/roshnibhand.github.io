@@ -729,6 +729,13 @@ def render_entry_card(entry: dict) -> str:
     tags = "".join(f'<span class="tag">{html.escape(tag)}</span>' for tag in parse_csv(entry["tags"]))
     meta = f"{format_date(entry['published_on'])} • {html.escape(entry['read_time'])}"
     label = "Project" if entry["kind"] == "project" else "Article"
+    live_action = ""
+    if entry["slug"] == "company-intelligence-assistant":
+        live_action = """
+            <div class="story-card__actions">
+                <a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>
+            </div>
+        """
     return textwrap.dedent(
         f"""
         <article class="story-card reveal" data-reveal>
@@ -742,6 +749,7 @@ def render_entry_card(entry: dict) -> str:
                     <div class="tag-row">{tags}</div>
                 </div>
             </a>
+            {live_action}
         </article>
         """
     ).strip()
@@ -1111,6 +1119,20 @@ def render_story_detail(profile: dict, entry: dict) -> str:
         if entry["kind"] == "project"
         else "This article reflects how I communicate analytical thinking, explain tradeoffs, and make complex work easier for others to understand."
     )
+    live_project_tile = ""
+    live_side_link = ""
+    if entry["slug"] == "company-intelligence-assistant":
+        live_project_tile = """
+        <section class="live-project-tile">
+            <div>
+                <div class="eyebrow">Live App</div>
+                <h2>Try the Company Intelligence Assistant</h2>
+                <p>Search any company and download an AI-generated Company Intelligence Snapshot as a PowerPoint deck.</p>
+            </div>
+            <a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>
+        </section>
+        """
+        live_side_link = '<a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>'
     body = textwrap.dedent(
         f"""
         <section class="detail-hero">
@@ -1128,6 +1150,7 @@ def render_story_detail(profile: dict, entry: dict) -> str:
                 </div>
             </div>
         </section>
+        {live_project_tile}
         <section class="detail-layout">
             <article class="article-body">
                 {render_markdown(entry["body_markdown"])}
@@ -1140,6 +1163,7 @@ def render_story_detail(profile: dict, entry: dict) -> str:
                 </div>
                 <div class="detail-sidecard__group">
                     <div class="eyebrow">Continue Exploring</div>
+                    {live_side_link}
                     <a class="inline-link" href="{related_href}">{related_label}</a>
                     <a class="inline-link" href="{html.escape(profile["linkedin_url"], quote=True)}" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
                 </div>
