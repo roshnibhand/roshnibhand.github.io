@@ -210,6 +210,23 @@ def build_page(query: str = "", result: Optional[ResearchReport] = None, errors:
       font-weight: 700;
       text-decoration: none;
     }}
+    .nav-actions {{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }}
+    .portfolio-link {{
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff !important;
+      box-shadow: 0 10px 22px rgba(23, 32, 38, 0.16);
+    }}
     .hero {{
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr);
@@ -507,7 +524,10 @@ def build_page(query: str = "", result: Optional[ResearchReport] = None, errors:
   <main class="shell">
     <nav class="topbar" aria-label="Top navigation">
       <div class="brand"><span class="brand-mark">C</span>Company Intelligence Assistant</div>
-      <a href="/">New search</a>
+      <div class="nav-actions">
+        <a href="/">New search</a>
+        <a class="portfolio-link" href="https://roshnibhandula.com/" target="_blank" rel="noreferrer">Back to roshnibhandula.com</a>
+      </div>
     </nav>
 
     <section class="hero">
