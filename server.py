@@ -1119,7 +1119,7 @@ def render_story_detail(profile: dict, entry: dict) -> str:
         else "This article reflects how I communicate analytical thinking, explain tradeoffs, and make complex work easier for others to understand."
     )
     live_project_tile = ""
-    live_side_link = ""
+    live_sidecard = ""
     if entry["slug"] == "company-intelligence-assistant":
         live_project_tile = """
         <section class="live-project-tile">
@@ -1131,7 +1131,14 @@ def render_story_detail(profile: dict, entry: dict) -> str:
             <a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>
         </section>
         """
-        live_side_link = '\n                    <a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>'
+        live_sidecard = """
+                <div class="detail-sidecard__group live-sidecard">
+                    <div class="eyebrow">Live App</div>
+                    <h3>Use the tool</h3>
+                    <p>Open the live Render app to search any company and export the result as a PPT deck.</p>
+                    <a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>
+                </div>
+        """
     body = textwrap.dedent(
         f"""
         <section class="detail-hero">
@@ -1153,14 +1160,14 @@ def render_story_detail(profile: dict, entry: dict) -> str:
             <article class="article-body">
                 {render_markdown(entry["body_markdown"])}
             </article>
-            <aside class="detail-sidecard">
+            <aside class="detail-sidecard">{live_sidecard}
                 <div class="detail-sidecard__group">
                     <div class="eyebrow">Why This Matters</div>
                     <p>{role_copy}</p>
                     <div class="tag-row">{tags}</div>
                 </div>
                 <div class="detail-sidecard__group">
-                    <div class="eyebrow">Continue Exploring</div>{live_side_link}
+                    <div class="eyebrow">Continue Exploring</div>
                     <a class="inline-link" href="{related_href}">{related_label}</a>
                     <a class="inline-link" href="{html.escape(profile["linkedin_url"], quote=True)}" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
                 </div>

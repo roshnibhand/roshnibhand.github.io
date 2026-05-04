@@ -767,6 +767,41 @@ li {
   border-top: 1px solid var(--line);
 }
 
+.detail-sidecard__group .inline-link {
+  display: block;
+  margin-top: 12px;
+}
+
+.live-sidecard {
+  padding: 22px;
+  border-radius: 22px;
+  background: #172026;
+  color: #f7f8f3;
+  border-top: 0 !important;
+}
+
+.live-sidecard h3 {
+  margin: 8px 0 10px;
+  font-size: 1.35rem;
+}
+
+.live-sidecard p {
+  margin: 0 0 16px;
+  color: #c8d2cc;
+  line-height: 1.55;
+}
+
+.live-sidecard .eyebrow {
+  color: #e5b769;
+}
+
+.live-sidecard .button {
+  width: 100%;
+  background: linear-gradient(135deg, #e5b769, #f3e5c3);
+  color: #172026;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
 .breadcrumb {
   margin-bottom: 22px;
   color: var(--muted);
