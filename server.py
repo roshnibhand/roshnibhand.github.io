@@ -118,7 +118,7 @@ def ensure_storage() -> None:
                     "roshnibhandula@gmail.com",
                     "https://www.linkedin.com/in/roshni-bhandula",
                     "I use this portfolio to show how I structure business questions, build analytics frameworks, and translate findings into decisions leaders can act on.",
-                    "I am an analytics professional with 6+ years of experience across business intelligence, performance reporting, customer insights, and workflow improvement. At Cvent, I work on turning complex commercial and product data into decisions that improve customer outcomes, team execution, and revenue performance.",
+                    "I am an analytics professional with 6+ years of experience across business intelligence, performance reporting, customer insights, and workflow improvement. At Cvent, I work on turning complex commercial and product data into decisions that improve customer outcomes, team execution, and revenue performance. Based in New Jersey, I am authorized to work in the United States for any employer.",
                     "What energizes me most is translating noisy business questions into something decision-ready. I enjoy building analysis frameworks, repeatable reporting, and clear narratives that help stakeholders see what is changing, why it matters, and what to do next. This website is where I turn that work into projects, case studies, and practical reflections.",
                     "",
                     "I am targeting business analytics, business intelligence, customer insights, and strategy-facing roles where I can combine analytical depth with clear stakeholder communication.",
