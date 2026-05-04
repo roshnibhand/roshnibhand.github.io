@@ -1,22 +1,54 @@
 <svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="760" rx="34" fill="#172026"/>
-  <rect x="58" y="58" width="1084" height="644" rx="28" fill="#F7F8F3"/>
-  <rect x="108" y="116" width="984" height="88" rx="16" fill="#172026"/>
-  <text x="142" y="170" fill="#FFFFFF" font-family="Georgia, Times New Roman, serif" font-size="34" font-weight="700">Company Intelligence Assistant</text>
-  <rect x="108" y="248" width="302" height="324" rx="18" fill="#FFFFFF" stroke="#D7DDD2" stroke-width="2"/>
-  <rect x="449" y="248" width="302" height="324" rx="18" fill="#FFFFFF" stroke="#D7DDD2" stroke-width="2"/>
-  <rect x="790" y="248" width="302" height="324" rx="18" fill="#FFFFFF" stroke="#D7DDD2" stroke-width="2"/>
-  <text x="138" y="302" fill="#A43F2B" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">WEB-GROUNDED</text>
-  <text x="138" y="352" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="40" font-weight="700">Search</text>
-  <text x="138" y="400" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="23">Gemini gathers current public signals across company pages, news, and web results.</text>
-  <text x="479" y="302" fill="#A43F2B" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">STRUCTURED</text>
-  <text x="479" y="352" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="40" font-weight="700">Snapshot</text>
-  <text x="479" y="400" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="23">Business model, customers, competition, finances, leadership, culture, and trajectory.</text>
-  <text x="820" y="302" fill="#A43F2B" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">OUTPUT</text>
-  <text x="820" y="352" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="40" font-weight="700">PPT deck</text>
-  <text x="820" y="400" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="23">Turns research into a downloadable, editable Company Intelligence Snapshot.</text>
-  <path d="M242 612C338 640 464 640 559 611C656 582 772 582 958 620" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="242" cy="612" r="18" fill="#0F766E"/>
-  <circle cx="559" cy="611" r="18" fill="#0F766E"/>
-  <circle cx="958" cy="620" r="18" fill="#0F766E"/>
+  <rect width="1200" height="760" rx="34" fill="#101820"/>
+  <rect x="54" y="54" width="1092" height="652" rx="30" fill="#F7F8F3"/>
+
+  <rect x="104" y="104" width="992" height="92" rx="22" fill="#172026"/>
+  <circle cx="148" cy="150" r="12" fill="#0F766E"/>
+  <circle cx="184" cy="150" r="12" fill="#A43F2B"/>
+  <circle cx="220" cy="150" r="12" fill="#E5B769"/>
+  <text x="258" y="144" fill="#FFFFFF" font-family="Georgia, Times New Roman, serif" font-size="34" font-weight="700">Company Intelligence Assistant</text>
+  <text x="258" y="174" fill="#C8D2CC" font-family="Inter, Arial, sans-serif" font-size="19">Search any company. Build a research snapshot. Export a PPT deck.</text>
+
+  <rect x="104" y="232" width="446" height="366" rx="24" fill="#FFFFFF" stroke="#D7DDD2" stroke-width="2"/>
+  <text x="136" y="284" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">LIVE WEB SEARCH</text>
+  <rect x="136" y="306" width="360" height="54" rx="27" fill="#F0F4EF" stroke="#D7DDD2" stroke-width="2"/>
+  <text x="168" y="341" fill="#172026" font-family="Inter, Arial, sans-serif" font-size="21">Farmako Healthcare</text>
+  <circle cx="464" cy="333" r="15" fill="#0F766E"/>
+  <path d="M458 333H470M464 327V339" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+
+  <rect x="136" y="397" width="170" height="82" rx="18" fill="#E8F2ED"/>
+  <text x="158" y="430" fill="#0F766E" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">BUSINESS</text>
+  <text x="158" y="459" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="26" font-weight="700">Model</text>
+
+  <rect x="326" y="397" width="170" height="82" rx="18" fill="#F4E9E3"/>
+  <text x="348" y="430" fill="#A43F2B" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">MARKET</text>
+  <text x="348" y="459" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="26" font-weight="700">Rivals</text>
+
+  <rect x="136" y="499" width="170" height="82" rx="18" fill="#F3EDDB"/>
+  <text x="158" y="532" fill="#8A6423" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">SIGNALS</text>
+  <text x="158" y="561" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="26" font-weight="700">Health</text>
+
+  <rect x="326" y="499" width="170" height="82" rx="18" fill="#EEF0F5"/>
+  <text x="348" y="532" fill="#32455F" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">LEADERS</text>
+  <text x="348" y="561" fill="#172026" font-family="Georgia, Times New Roman, serif" font-size="26" font-weight="700">People</text>
+
+  <rect x="610" y="232" width="486" height="366" rx="24" fill="#172026"/>
+  <text x="646" y="286" fill="#E8F2ED" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">AI-GENERATED SNAPSHOT</text>
+  <text x="646" y="334" fill="#FFFFFF" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="700">Company briefing,</text>
+  <text x="646" y="378" fill="#FFFFFF" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="700">ready to present.</text>
+
+  <rect x="646" y="424" width="186" height="110" rx="20" fill="#F7F8F3"/>
+  <text x="670" y="462" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">PPT EXPORT</text>
+  <rect x="670" y="482" width="96" height="8" rx="4" fill="#A43F2B"/>
+  <rect x="670" y="504" width="132" height="8" rx="4" fill="#D7DDD2"/>
+
+  <rect x="856" y="424" width="186" height="110" rx="20" fill="#F7F8F3"/>
+  <text x="880" y="462" fill="#63707A" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">PERSPECTIVE</text>
+  <rect x="880" y="482" width="74" height="8" rx="4" fill="#0F766E"/>
+  <rect x="880" y="504" width="128" height="8" rx="4" fill="#D7DDD2"/>
+
+  <path d="M180 646C298 610 403 664 520 628C646 589 750 596 861 632C925 653 996 650 1060 626" stroke="#0F766E" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="180" cy="646" r="16" fill="#0F766E"/>
+  <circle cx="520" cy="628" r="16" fill="#E5B769"/>
+  <circle cx="861" cy="632" r="16" fill="#A43F2B"/>
 </svg>

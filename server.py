@@ -748,8 +748,7 @@ def render_entry_card(entry: dict) -> str:
                     <div class="story-meta">{meta}</div>
                     <div class="tag-row">{tags}</div>
                 </div>
-            </a>
-            {live_action}
+            </a>{live_action}
         </article>
         """
     ).strip()
@@ -1132,7 +1131,7 @@ def render_story_detail(profile: dict, entry: dict) -> str:
             <a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>
         </section>
         """
-        live_side_link = '<a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>'
+        live_side_link = '\n                    <a class="button" href="https://company-intelligence-assistant.onrender.com/" target="_blank" rel="noreferrer">Launch Live App</a>'
     body = textwrap.dedent(
         f"""
         <section class="detail-hero">
@@ -1149,8 +1148,7 @@ def render_story_detail(profile: dict, entry: dict) -> str:
                     {render_cover(entry["title"], entry["accent"], entry["cover_image"], breadcrumb_label[:-1])}
                 </div>
             </div>
-        </section>
-        {live_project_tile}
+        </section>{live_project_tile}
         <section class="detail-layout">
             <article class="article-body">
                 {render_markdown(entry["body_markdown"])}
@@ -1162,8 +1160,7 @@ def render_story_detail(profile: dict, entry: dict) -> str:
                     <div class="tag-row">{tags}</div>
                 </div>
                 <div class="detail-sidecard__group">
-                    <div class="eyebrow">Continue Exploring</div>
-                    {live_side_link}
+                    <div class="eyebrow">Continue Exploring</div>{live_side_link}
                     <a class="inline-link" href="{related_href}">{related_label}</a>
                     <a class="inline-link" href="{html.escape(profile["linkedin_url"], quote=True)}" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
                 </div>
