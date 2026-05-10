@@ -112,20 +112,20 @@ def ensure_storage() -> None:
                 (
                     1,
                     "Roshni Bhandula",
-                    "Turning customer, product, and revenue data into clearer business decisions",
+                    "I build decision-ready analytics for product, customer, and business teams.",
                     "Lead Analyst at Cvent",
                     "Jersey City, NJ",
                     "roshnibhandula@gmail.com",
                     "https://www.linkedin.com/in/roshni-bhandula",
-                    "I use this portfolio to show how I structure business questions, build analytics frameworks, and translate findings into decisions leaders can act on.",
-                    "I am an analytics professional with 6+ years of experience across business intelligence, performance reporting, customer insights, and workflow improvement. At Cvent, I work on turning complex commercial and product data into decisions that improve customer outcomes, team execution, and revenue performance. Based in New Jersey, I am authorized to work in the United States for any employer.",
-                    "What energizes me most is translating noisy business questions into something decision-ready. I enjoy building analysis frameworks, repeatable reporting, and clear narratives that help stakeholders see what is changing, why it matters, and what to do next. This website is where I turn that work into projects, case studies, and practical reflections.",
+                    "Lead Analyst at Cvent with 6+ years building reporting systems, customer diagnostics, and business narratives that help teams act with more clarity.",
+                    "I am an analytics professional with 6+ years of experience across business intelligence, customer insights, product reporting, and workflow improvement. Most of my work has lived close to commercial and product decisions, where the challenge is not just building analysis, but making it trustworthy, useful, and easy for stakeholders to act on. I am based in New Jersey and authorized to work in the United States for any employer.",
+                    "The work I enjoy most is the kind that starts messy: an unclear funnel, a reporting problem people do not fully trust, a customer pattern that needs explanation, or a business question that is still too vague to act on. My role in those situations is usually to create structure, pressure-test the data, and turn the output into something decision-ready. This site is where I make that work legible through case studies, writing, and proof that feels grounded rather than overly polished.",
                     "",
-                    "I am targeting business analytics, business intelligence, customer insights, and strategy-facing roles where I can combine analytical depth with clear stakeholder communication.",
+                    "I am targeting analytics, business intelligence, customer insight, and strategy-facing roles where strong analysis needs to translate into stakeholder action.",
                     "A few interests outside work help me stay observant, communicate more clearly, and keep a balanced perspective.",
-                    "Right now, I am refining this portfolio into sharper proof for analytics, BI, and customer insights roles: clearer case studies, better framing, and faster recruiter comprehension.",
-                    "Business intelligence and reporting systems\nCustomer and revenue insights\nStructured stakeholder communication\nWorkflow simplification and automation",
-                    "Business analytics and business intelligence roles\nCustomer insights and strategy roles\nRevenue, commercial, or performance analytics roles\nOperations and process improvement roles",
+                    "Right now, I am focused on making the site easier for recruiters and hiring managers to scan quickly: stronger proof, clearer case studies, and a more realistic view of how I work.",
+                    "Decision-ready reporting systems\nCustomer, product, and business diagnostics\nCommercially useful storytelling\nWorkflow simplification through automation",
+                    "Business analytics and business intelligence roles\nCustomer insights and strategy roles\nCommercial and performance analytics roles\nCross-functional product and operations roles",
                 ),
             )
 
@@ -754,6 +754,55 @@ def render_entry_card(entry: dict) -> str:
     ).strip()
 
 
+def prioritize_home_entries(entries: list[dict], preferred_slugs: list[str]) -> list[dict]:
+    entry_by_slug = {entry["slug"]: entry for entry in entries}
+    ordered: list[dict] = []
+    seen: set[str] = set()
+
+    for slug in preferred_slugs:
+        entry = entry_by_slug.get(slug)
+        if entry:
+            ordered.append(entry)
+            seen.add(slug)
+
+    for entry in entries:
+        if entry["slug"] not in seen:
+            ordered.append(entry)
+
+    return ordered
+
+
+def render_home_lead(entry: dict) -> str:
+    tags = "".join(f'<span class="tag">{html.escape(tag)}</span>' for tag in parse_csv(entry["tags"]))
+    label = "Project" if entry["kind"] == "project" else "Article"
+    meta = f"{format_date(entry['published_on'])} • {html.escape(entry['read_time'])}"
+    actions = [
+        f'<a class="button" href="{entry_url(entry)}">Read Case Study</a>',
+    ]
+    if entry["slug"] == "company-intelligence-assistant":
+        actions.append(
+            '<a class="button button--secondary" href="https://company-intelligence-assistant.onrender.com/" '
+            'target="_blank" rel="noreferrer">Launch Live App</a>'
+        )
+    return textwrap.dedent(
+        f"""
+        <article class="signature-card reveal" data-reveal>
+            <div class="signature-card__media">
+                {render_cover(entry["title"], entry["accent"], entry["cover_image"], label)}
+            </div>
+            <div class="signature-card__content">
+                <div class="eyebrow">Signature Case Study</div>
+                <h3>{html.escape(entry["title"])}</h3>
+                <p>{html.escape(entry["summary"])}</p>
+                <div class="story-meta">{meta}</div>
+                <div class="tag-row">{tags}</div>
+                <div class="signature-card__actions">{"".join(actions)}</div>
+            </div>
+        </article>
+        """
+    ).strip()
+
+
 def render_hobby_card(hobby: dict) -> str:
     media_html = (
         f'<img src="{html.escape(hobby["image_path"], quote=True)}" alt="{html.escape(hobby["title"], quote=True)}" loading="lazy">'
@@ -811,7 +860,13 @@ def public_navigation(active: str) -> str:
 def page_shell(title: str, body: str, *, active: str, description: str, admin_view: bool = False) -> str:
     header = (
         '<header class="site-header">'
-        '<div class="brand"><a href="/">RB</a></div>'
+        '<div class="brand">'
+        '<a class="brand-mark" href="/">RB</a>'
+        '<div class="brand-copy">'
+        '<span class="brand-name">Roshni Bhandula</span>'
+        '<span class="brand-role">Analytics, BI, and customer insight work</span>'
+        "</div>"
+        "</div>"
         f'<nav class="site-nav">{public_navigation(active)}</nav>'
         "</header>"
         if not admin_view
@@ -876,109 +931,174 @@ def page_shell(title: str, body: str, *, active: str, description: str, admin_vi
 def render_home(profile: dict, hobbies: list[dict], projects: list[dict], articles: list[dict]) -> str:
     focus_items = parse_lines(profile["focus_points"])
     role_items = parse_lines(profile["roles_of_interest"])
-    focus_html = "".join(
-        (
-            '<div class="focus-card reveal" data-reveal>'
-            f'<span class="focus-index">0{index + 1}</span>'
-            f"<h3>{html.escape(item)}</h3>"
-            f"<p>{html.escape(item)} delivered through structured analysis, stakeholder alignment, and decision-ready communication.</p>"
-            "</div>"
-        )
-        for index, item in enumerate(focus_items)
+    prioritized_projects = prioritize_home_entries(
+        projects,
+        [
+            "consumer-demand-signal-2026",
+            "company-intelligence-assistant",
+            "data-led-discovery-review-system",
+            "property-portfolio-health-scorecard",
+            "personal-brand-visibility-system",
+        ],
     )
-    roles_html = "".join(
-        f"<li>{html.escape(item)}</li>" for item in role_items
-    )
+    lead_project = prioritized_projects[0] if prioritized_projects else None
+    supporting_projects = prioritized_projects[1:3]
+    supporting_articles = articles[:2]
     role_pills = "".join(f'<span class="tag">{html.escape(item)}</span>' for item in role_items)
     hobbies_html = "".join(render_hobby_card(hobby) for hobby in hobbies)
-    project_cards = "".join(render_entry_card(entry) for entry in projects[:2])
-    article_cards = "".join(render_entry_card(entry) for entry in articles[:2])
-    summary_cards = [
-        ("Experience", "6+ years across BI, reporting, and insights"),
-        ("Current Role", profile["current_role"]),
-        ("Core Strength", "Turning analysis into clear stakeholder decisions"),
-        ("Base", profile["location"]),
+    project_cards = "".join(render_entry_card(entry) for entry in supporting_projects)
+    article_cards = "".join(render_entry_card(entry) for entry in supporting_articles)
+    proof_cards = [
+        ("6+", "years across BI, reporting, and customer insight work"),
+        ("30+", "dashboards and recurring reporting views built"),
+        ("80%", "of recurring reporting automated in prior workflows"),
+        ("End-to-end", "from problem framing through stakeholder-ready recommendations"),
     ]
-    summary_html = "".join(
+    proof_html = "".join(
         (
-            '<div class="summary-card reveal" data-reveal>'
-            f'<span class="summary-card__label">{html.escape(label)}</span>'
-            f"<strong>{html.escape(value)}</strong>"
+            '<div class="proof-card reveal" data-reveal>'
+            f'<strong class="proof-card__value">{html.escape(value)}</strong>'
+            f'<span class="proof-card__label">{html.escape(label)}</span>'
             "</div>"
         )
-        for label, value in summary_cards
+        for value, label in proof_cards
     )
-    about_image_html = (
-        '<div class="about-portrait reveal" data-reveal>'
-        f'<img src="{html.escape(profile["about_image"], quote=True)}" alt="{html.escape(profile["name"], quote=True)} portrait" loading="lazy">'
-        "</div>"
-        if profile.get("about_image")
-        else ""
+    value_cards = [
+        (
+            "Measurement systems",
+            "I rebuild noisy reporting into something teams can trust, reuse, and make decisions from quickly.",
+        ),
+        (
+            "Commercial and customer diagnosis",
+            "I focus on the part of the funnel, portfolio, or workflow where value is actually leaking and translate that into concrete next steps.",
+        ),
+        (
+            "Stakeholder-ready communication",
+            "I care about whether the analysis changes the conversation, not just whether the dashboard exists.",
+        ),
+    ]
+    value_cards_html = "".join(
+        (
+            '<article class="evidence-card reveal" data-reveal>'
+            f'<span class="evidence-card__label">0{index + 1}</span>'
+            f"<h3>{html.escape(title)}</h3>"
+            f"<p>{html.escape(copy)}</p>"
+            "</article>"
+        )
+        for index, (title, copy) in enumerate(value_cards)
     )
-    article_heading = "Writing that shows how I frame and communicate the work"
-    article_empty = (
-        '<div class="empty-state">Writing samples will appear here as they are published.</div>'
-        if not article_cards
-        else ""
-    )
+    focus_list_html = "".join(f"<li>{html.escape(item)}</li>" for item in focus_items)
+    article_empty = '<div class="empty-state">Writing samples will appear here as they are published.</div>' if not article_cards else ""
+    lead_project_html = render_home_lead(lead_project) if lead_project else ""
+    authorization_note = "Authorized to work in the United States for any employer."
     body = textwrap.dedent(
         f"""
-        <section class="hero-section">
-            <div class="hero-shell">
-                <div class="hero-copy reveal is-visible" data-reveal>
-                    <div class="eyebrow">Analytics Portfolio</div>
-                    <h1>{html.escape(profile["headline"])}</h1>
-                    <p class="hero-lead">{html.escape(profile["hero_note"])}</p>
-                    <div class="hero-meta">
-                        <span>{html.escape(profile["name"])}</span>
-                        <span>{html.escape(profile["current_role"])}</span>
-                        <span>{html.escape(profile["location"])}</span>
+        <section class="hero-section hero-section--home">
+            <div class="hero-shell hero-shell--home">
+                <div class="hero-copy hero-copy--home reveal is-visible" data-reveal>
+                    <div class="eyebrow-row">
+                        <div class="eyebrow">Recruiter-Friendly Portfolio</div>
+                        <span class="status-pill">Open to U.S. analytics roles</span>
                     </div>
+                    <h1>I build decision-ready analytics for product, customer, and business teams.</h1>
+                    <p class="hero-lead">Currently a {html.escape(profile["current_role"])} based in {html.escape(profile["location"])}, I turn messy commercial and product data into reporting systems, sharper diagnostics, and recommendations leaders can actually use.</p>
                     <div class="hero-actions">
-                        <a class="button" href="/projects">View Projects</a>
-                        <a class="button button--secondary" href="/articles">Read Insights</a>
+                        <a class="button" href="#signature-work">Start with Case Studies</a>
+                        <a class="button button--secondary" href="mailto:{html.escape(profile["email"], quote=True)}">Contact Me</a>
                     </div>
+                    <div class="proof-grid">{proof_html}</div>
                 </div>
-                <aside class="hero-aside">
+                <aside class="hero-rail">
+                    <div class="profile-card reveal" data-reveal>
+                        <div class="profile-card__media">
+                            <img src="{html.escape(profile["about_image"], quote=True)}" alt="{html.escape(profile["name"], quote=True)} portrait" loading="lazy">
+                        </div>
+                        <div class="profile-card__body">
+                            <div class="eyebrow">Currently</div>
+                            <div class="profile-card__name">{html.escape(profile["name"])}</div>
+                            <p class="profile-card__role">{html.escape(profile["current_role"])} · {html.escape(profile["location"])}</p>
+                            <p class="profile-card__note">{authorization_note}</p>
+                        </div>
+                    </div>
                     <div class="hero-panel reveal" data-reveal>
-                        <div class="hero-panel__label">Current Focus</div>
-                        <p>{html.escape(profile["now_note"])}</p>
-                        <div class="tag-row">{role_pills}</div>
+                        <div class="hero-panel__label">Where I Create Value</div>
+                        <ul class="signal-list">{focus_list_html}</ul>
                     </div>
                     <div class="hero-panel hero-panel--compact reveal" data-reveal>
-                        <div class="hero-panel__label">What You Will Find Here</div>
-                        <p>Selected case studies, applied analytics thinking, and portfolio-ready proof for business intelligence, customer insights, and strategy-facing roles.</p>
-                        <a class="inline-link" href="#featured-work">Start with featured work</a>
+                        <div class="hero-panel__label">Target Roles</div>
+                        <p>{html.escape(profile["looking_for"])}</p>
+                        <div class="tag-row">{role_pills}</div>
                     </div>
                 </aside>
             </div>
-            <div class="summary-strip">{summary_html}</div>
         </section>
 
-        <section class="content-section" id="featured-work">
+        <section class="content-section" id="signature-work">
             <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Featured Case Studies</div>
-                <h2>Selected work that shows how I approach analytics and decisions</h2>
-                <p>These projects are the fastest way to understand how I frame questions, structure analysis, and turn findings into action.</p>
+                <div class="eyebrow">Start Here</div>
+                <h2>The fastest way to understand how I work</h2>
+                <p>These are the pieces I would want a hiring manager or recruiter to see first: structured problem solving, measurable outcomes, and work that feels useful in the real world.</p>
             </div>
-            <div class="story-grid">{project_cards}</div>
-            <div class="section-link-row"><a class="inline-link" href="/projects">Browse all projects</a></div>
+            <div class="signature-grid">
+                {lead_project_html}
+                <div class="signature-stack">
+                    <div class="section-card section-card--compact reveal" data-reveal>
+                        <div class="eyebrow">How I Tend to Work</div>
+                        <h3>Structured, commercial, and close to the decision</h3>
+                        <p>I am most useful when a team needs clarity: the right metric, the right framing, the real source of friction, or the next recommendation worth acting on.</p>
+                        <a class="inline-link" href="#about">Read the experience snapshot</a>
+                    </div>
+                    <div class="story-grid story-grid--supporting">{project_cards}</div>
+                </div>
+            </div>
+            <div class="section-link-row"><a class="inline-link" href="/projects">Browse all case studies</a></div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-heading reveal" data-reveal>
+                <div class="eyebrow">Working Style</div>
+                <h2>How I usually create value once I am in the room</h2>
+                <p>I am strongest when the work needs both analytical depth and calm business judgment, especially when the underlying question is still messy.</p>
+            </div>
+            <div class="evidence-grid">{value_cards_html}</div>
         </section>
 
         <section id="about" class="content-section content-section--split">
-            <div class="about-intro-stack">
+            <div class="about-intro-stack reveal" data-reveal>
                 <div class="section-heading reveal" data-reveal>
-                    <div class="eyebrow">Professional Overview</div>
-                    <h2>{html.escape(profile["name"])}</h2>
+                    <div class="eyebrow">Experience Snapshot</div>
+                    <h2>A more grounded view of my background</h2>
                     <p>{html.escape(profile["about_intro"])}</p>
                 </div>
-                {about_image_html}
+                <div class="timeline-card">
+                    <div class="timeline-item">
+                        <span class="timeline-year">2024 to now</span>
+                        <div class="timeline-copy">
+                            <h3>Lead Analyst, Cvent</h3>
+                            <p>Product, customer, and business analytics with a strong focus on decision-ready reporting, diagnostic work, and stakeholder communication.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2022 to 2024</span>
+                        <div class="timeline-copy">
+                            <h3>Senior Analyst, Cvent</h3>
+                            <p>Built dashboards, automated recurring reporting, and supported commercial and customer-facing teams with clearer KPI visibility.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">Earlier</span>
+                        <div class="timeline-copy">
+                            <h3>WNS and dunnhumby</h3>
+                            <p>Built the base in forecasting, performance analysis, customer analytics, and experimental thinking that still shows up in how I work today.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="section-copy reveal" data-reveal>
-                {render_text_block(profile["about_story"])}
+                {render_text_block(profile["about_story"], class_name="rich-copy rich-copy--wide")}
                 <div class="callout-card">
-                    <span class="eyebrow">Target Roles</span>
-                    <p>{html.escape(profile["looking_for"])}</p>
+                    <span class="eyebrow">Current Search</span>
+                    <p>{html.escape(profile["now_note"])}</p>
                     <div class="tag-row">{role_pills}</div>
                 </div>
             </div>
@@ -986,28 +1106,9 @@ def render_home(profile: dict, hobbies: list[dict], projects: list[dict], articl
 
         <section class="content-section">
             <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Capabilities</div>
-                <h2>How I tend to create value</h2>
-                <p>The common thread across my work is turning ambiguity into structure, then using that structure to help teams move with more clarity.</p>
-            </div>
-            <div class="focus-grid">{focus_html}</div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-heading reveal" data-reveal>
-                <div class="eyebrow">Role Alignment</div>
-                <h2>Where this portfolio is strongest</h2>
-            </div>
-            <div class="opportunity-card reveal" data-reveal>
-                <ul class="opportunity-list">{roles_html}</ul>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-heading reveal" data-reveal>
                 <div class="eyebrow">Writing & Communication</div>
-                <h2>{article_heading}</h2>
-                <p>Strong analysis travels further when it is explained well. These pieces show how I translate observations into clear, useful narratives.</p>
+                <h2>Writing that shows how I explain the work</h2>
+                <p>Good analytics does not travel on technical accuracy alone. These pieces show how I turn observations into clear, useful narratives for non-technical readers.</p>
             </div>
             <div class="story-grid">{article_cards or article_empty}</div>
             <div class="section-link-row"><a class="inline-link" href="/articles">Browse all insights</a></div>
